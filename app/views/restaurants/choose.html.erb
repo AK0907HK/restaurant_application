@@ -1,0 +1,56 @@
+<h1>選択結果</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <% if @restaurants.count > 0 %>
+      <ol class="restaurants">
+        <li id="@restaurant-<%= @restaurant.id %>">
+        <div class="restaurants-index-item">
+          <div class="restaurant-img">
+            <% if @restaurant.image.attached? %>
+              <%= image_tag @restaurant.image.variant( resize: "50x50^", gravity: "center", crop: "100x100+0+0" )  %>
+            <% else %>
+              <%=  image_tag 'ディフォルト画像2.png' ,:size =>'50x50' %>
+            <% end %>
+          </div>
+          <div class="restaurant-upper-right">
+          <%= link_to @restaurant.name,restaurant_path(@restaurant) , data: {turbolinks: false} ,class:"restaurant-name" %>
+       
+            <div class="restaurant-user">
+              <% @user = User.find_by(id:@restaurant.user_id) %>
+              <%= image_tag @user.image.variant( resize: "30x30^", gravity: "center", crop: "100x100+0+0" ) if @user.image.attached? %>
+              <span class="user"><%= @user.name %></span>
+            </div>  
+          </div> 
+
+          <div = "restaurant-bottom">
+          <div class = "restrant-info">
+            <% area1 = Area1.find_by(id:@restaurant.area1) %>
+              <%= "#" + "#{area1.name}" %>
+            <% area2 = Area2.find_by(id:@restaurant.area2) %>
+            <% if area2  %>
+              <%= "#" + "#{area2.city}" %>
+            <% else %>
+             <% " " %> 
+            <% end %> 
+            <% if @restaurant.genre  != ""  %>
+              <%= "#" + "#{@restaurant.genre}" %>
+            <% else %>
+              <% " " %> 
+            <% end %> 
+            <% if @restaurant.time != "" %>
+              <%= "#" + "#{@restaurant.time}" %>
+            <% else %>
+              <% " " %> 
+            <% end %> 
+          </div>
+        </div>
+      </div>
+    </li>
+    </ol>
+    <% else %>
+      <div class="form"> 
+        <p>検索結果がありませんでした。もう一度条件を絞りなおしてください。</p>
+      </div>
+    <% end %>
+  </div>
+ </div>

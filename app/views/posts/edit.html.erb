@@ -1,0 +1,19 @@
+<h1>ポストを編集する</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_with(model: @post) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+      <%= f.label :name %>
+      <%= f.text_field :name ,value:@post.name,id:'post-name' %>
+      <div class="field">
+        <%= f.text_area :content, value:@post.content ,id:'post-content' %>
+      </div>
+      <span class="image">
+        <%= f.file_field :images, multiple: true ,accept: "image/jpeg,image/gif,image/png" %>
+      </span>
+      <p>画像のアップロード</p>
+      <%= f.submit "編集する", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

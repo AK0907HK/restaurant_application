@@ -1,0 +1,75 @@
+<li id="post-<%= post.id %>">
+<div class="posts-index-item">
+  <div class = "post-user-image"> 
+  <% if @user.image.attached? %>
+    <%= image_tag @user.image.variant( resize: "60x60^", gravity: "center", crop: "100x100+0+0" )  %>
+  <% else %>
+    <%=  image_tag 'ディフォルト画像.png' ,:size =>'60x60' %>
+  <% end %>
+  </div>
+
+  <div class = "post-upper-right">
+  <div class="post-user">  
+      <%= @user.name %>
+    </div>
+
+    <div class = "post-name">
+      <%= post.name %>
+    </div>
+  </div>  
+ 
+  <div class="post-content">
+    <%= post.content %>
+  </div>
+  
+  <div class="post-image">
+    <% if post.images.length <= 1 %>
+      <% post.images.each do |image| %>
+        <%= image_tag(image, width:450,height:350) %> 
+      <% end %>
+      <% elsif post.images.length == 2  %>
+        <% post.images.each do |image| %>
+        <%= image_tag(image, width:220,height:200) %> 
+      <% end %>
+      <% else %>
+      <% i = 1 %>  
+      <% post.images.each do |image| %>
+       
+        <% if i ==  1 %>
+       
+          <%= image_tag(image, width:450,height:200) %> 
+          <% i = i + 1 %>
+        <% else %>  
+        
+          <%= image_tag(image, width:220,height:200) %> 
+          <% i = i + 1 %>
+        <% end %>
+      <% end %>
+    <% end %>  
+  </div>
+
+  <div class="post-time">
+    <%= "#{time_ago_in_words(post.created_at)}前にポスト" %>
+  </div>    
+
+
+  <div class="post-bottom"> 
+      <% if Like.find_by(user_id: @user.id, post_id: post.id) %>
+        <%= button_to "♥", like_path(post.id), {method: :delete , class: "liked-btn" ,params:{user_id:@user.id,post_id:post.id}}  %>
+      <% else %>
+        <%= button_to  "♥", likes_path(post.id), {method: :post,class: "unliked-btn",params:{user_id:@user.id,post_id:post.id}}  %>
+      <% end %>
+   
+
+
+  
+      <div class="post-menus">
+      <% if current_user?(post.user) %>
+        <%= link_to "編集" , edit_post_path(post) %>
+        <%= link_to "削除", post, data: { "turbo-method": :delete,turbo_confirm: "本当に削除しますか？" } %>
+      <% end %>
+      </div>
+  </div>
+
+</div>
+</li>

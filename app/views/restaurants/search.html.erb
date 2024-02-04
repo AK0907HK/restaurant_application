@@ -1,0 +1,104 @@
+<h1>検索結果</h1>
+<div class="row"> 
+  <div class="col-md-6 col-md-offset-3">
+    <% @restaurants.each do |restaurant|  %>
+      <ol class="restaurants">
+        <li id="restaurant-<%= restaurant.id %>">
+        <div class="restaurants-index-item">
+          <div class="restaurant-img">
+            <% if restaurant.image.attached? %>
+              <%= image_tag restaurant.image.variant( resize: "50x50^", gravity: "center", crop: "100x100+0+0" )  %>
+            <% else %>
+              <%=  image_tag 'ディフォルト画像2.png' ,:size =>'50x50' %>
+            <% end %>
+          </div>
+          <div class="restaurant-upper-right">
+          <%= link_to restaurant.name,restaurant_path(restaurant) , data: {turbolinks: false} ,class:"restaurant-name" %>  
+            <div class="restaurant-user">
+              <% @user = User.find_by(id:restaurant.user_id) %>
+              <%= image_tag @user.image.variant( resize: "30x30^", gravity: "center", crop: "100x100+0+0" ) if @user.image.attached? %>
+              <span class="user"><%= @user.name %></span>
+            </div>  
+          </div> 
+    
+          <div class="resturant-coment">  
+            <%= restaurant.coment %>
+          </div>
+    
+          <div = "restaurant-bottom">
+            <div class = "restrant-info">
+              <% area1 = Area1.find_by(id:restaurant.area1) %>
+              <%= "#" + "#{area1.name}" %>
+              <% area2 = Area2.find_by(id:restaurant.area2) %>
+            <% if area2  %>
+            <%= "#" + "#{area2.city}" %>
+            <% else %>
+             <% " " %> 
+            <% end %> 
+    
+            <% if restaurant.genre  != ""  %>
+              <%= "#" + "#{restaurant.genre}" %>
+            <% else %>
+              <% " " %> 
+            <% end %> 
+            <% if restaurant.time != "" %>
+              <%= "#" + "#{restaurant.time}" %>
+            <% else %>
+              <% " " %> 
+            <% end %> 
+          </div>
+    
+          <div class="restaurant-menu">
+            <% if current_user?(restaurant.user) %>
+              <%= link_to "編集" , edit_restaurant_path(restaurant) %>
+              <%= link_to "削除", restaurant, data: { "turbo-method": :delete,turbo_confirm: "本当に削除しますか？" } %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </li>
+      </ol>
+        <%= will_paginate @restaurants %>
+    <% end %>
+  </div>
+</div>
+  
+<script>
+
+var initSelect = ($target) => {
+  //セレクトボックスの中身を空にする
+  $target.empty()
+  //非選択時のオプションタグを追加する
+  $target.append(`<option></option>`)
+}
+//セレクトボックスの中身を第二引数 data の要素を持った選択肢にする
+var setSelect = ($target, data) => {
+  //引数 data の値をループで１件ずつ取得し、o として取り出す
+  $.each(data, (i, o) => {
+      //対象となるセレクトボックス($target)に対してオプションタグを追加
+      $target.append(`<option value="${o.id}">${o.city}</option>`)
+  })
+}
+
+//都道府県フォームからJSONデーターを取得
+
+var citiesData = $('#citySelect').data('json')
+
+
+var setCitiesOptions = (areaId) => {
+
+  console.log(areaId);
+  var result = citiesData.filter(o => o.area1_id == areaId)
+  initSelect($('#citySelect'))
+  setSelect($('#citySelect'), result)
+}
+
+
+document.getElementById('prefectureSelect').addEventListener('change', function(e){
+  var areaId = e.target.value
+  console.log(areaId);
+  setCitiesOptions(areaId)
+});
+
+</script>
+

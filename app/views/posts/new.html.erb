@@ -1,0 +1,39 @@
+<h1>ポスト</h1>
+
+
+  <div class="col-md-6 col-md-offset-3">
+  <div class="form">
+    <%= form_with(model: @post) do |f| %>
+
+   
+     
+      <%= render 'shared/error_messages', object: f.object %>
+
+   
+      <%= f.label :name %>
+      <%= f.text_field :name ,id:'post-name' %>
+
+
+ 
+   
+      <div class="field">
+       <%= f.label :content %>
+        <%= f.text_area :content, placeholder: "口コミを投稿しよう！" ,id:'post-content' %>
+      </div>
+   
+      <%= f.label :画像のアップロード %>
+      <span class="image">
+        <%= f.file_field :images, multiple: true ,accept: "image/jpeg,image/gif,image/png" %>
+      </span>
+      
+
+  
+      <%= f.submit "投稿する", class: "btn btn-primary" %>
+   
+       
+      <% end %>
+  
+
+  </div>
+  </div>
+

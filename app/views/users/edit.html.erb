@@ -1,0 +1,31 @@
+<h1>プロフィール変更</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="form">
+      <%= form_with(model: @user) do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+
+        <%= f.label :ユーザー名 %>
+        <%= f.text_field :name, class: 'form-control' %>
+
+        <%= f.label :メールアドレス %>
+        <%= f.email_field :email, class: 'form-control' %>
+
+        <%= f.label :パスワード %>
+        <%= f.password_field :password, class: 'form-control' %>
+
+        <%= f.label :password_confirmation, "パスワード（確認）" %>
+        <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+        <%= f.label :アイコン画像のアップロード %>
+        <span class="image">
+          <%= f.file_field :image %>
+        </span>
+
+        <%= f.submit "変更する", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+
+  </div>
+</div> 

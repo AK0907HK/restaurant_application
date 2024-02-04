@@ -1,0 +1,8 @@
+<p><%= @user.name %>　様</p>
+
+<p>この度はRestaurantChooserにご登録いただきありがとうございます。</p>
+<p>アカウント作成完了の為に、以下のリンクをクリックしてください。</p>
+
+<%= edit_account_activation_url(@user.activation_token, email: @user.email)  %>
+
+<p>また、本メールに心当たりのない方は無視してください。</p>

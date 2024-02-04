@@ -1,0 +1,32 @@
+<div class="row"> 
+<div class="col-md-6 col-md-offset-3">
+    <section class="user_info">
+      <p>
+     
+      <% if @user.image.attached? %>
+      <%= image_tag @user.image.variant( resize: "80x80^", gravity: "center", crop: "100x100+0+0" )  %>
+      <% else %>
+        <%=  image_tag 'ディフォルト画像.png' ,class:"user-icon-image" %>
+      <% end %> 
+ 
+        <%= @user.name %>
+      </p> 
+    </section>  
+    <ul class="user-tabs"> 
+      <li><%= link_to "ポスト" ,user_path(current_user.id) %></li>  
+      <li><%= link_to "いいね",likes_path(current_user.id)  %></li>
+      <li class="active"><%= link_to "お店",restaurants_path %></li> 
+    </ul>   
+
+    <ol class="restaurants">
+    <%= render @restaurants %>
+  </ol>
+    <%= will_paginate @restaurants %>
+  
+    </div>
+</div>
+
+
+
+
+
