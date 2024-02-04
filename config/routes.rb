@@ -22,8 +22,8 @@ Rails.application.routes.draw do
   resources :users
   #resources :restaurants, only: [:index,:show,:new,:create,:edit,:update,:destroy]
   #resources :likes, only: [:index,:create,:destroy]
-  #resources :account_activations, only: [:edit]
-  #resources :password_resets, only: [:new, :create, :edit, :update]
+  resources :account_activations, only: [:edit]
+  resources :password_resets, only: [:new, :create, :edit, :update]
   #resources :posts, only: [:new,:create,:edit,:update,:destroy]
   #get '/restaurants/:id', to: "restaurants#detail"
 
