@@ -15,7 +15,7 @@ before_action :check_admin, only: :destroy
 
   def create
     @user = User.new(user_params)
-    #@user.image.attach(params[:user][:image])
+    @user.image.attach(params[:user][:image])
     if @user.save
       #@user.send_activation_email
       flash[:info] = "メールを確認して、アカウント作成を完了させてください。"
