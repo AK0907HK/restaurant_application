@@ -6,7 +6,7 @@ before_action :check_admin, only: :destroy
 
   def show
     @user = User.find(params[:id])
-    #@posts = @user.posts.paginate(page:params[:page]) 
+    @posts = @user.posts.paginate(page:params[:page]) 
   end 
 
   def new
@@ -15,7 +15,7 @@ before_action :check_admin, only: :destroy
 
   def create
     @user = User.new(user_params)
-    #@user.image.attach(params[:user][:image])
+    @user.image.attach(params[:user][:image])
     if @user.save
       #@user.send_activation_email
       flash[:info] = "メールを確認して、アカウント作成を完了させてください。"

@@ -1,0 +1,49 @@
+<% if logged_in? %>
+<footer class="navbar navbar-fixed-bottom bg-primary">
+<div class="container">
+
+  <nav>
+    <ul class="footer-list">
+
+    <div class="footer-item">
+      <li>
+      <i class="fa fa-th-list" aria-hidden="true"></i>
+      <%= link_to "お店登録",  '#' %>
+      </li> 
+    </div>
+
+    <div class="footer-item">   
+      <li>
+      <i class="fa fa-check" aria-hidden="true"></i>
+      <%= link_to "お店選択", '#' %>
+      </li>
+    </div>  
+
+    <div class="footer-item">
+      <li>
+      <i class="fa fa-comment" aria-hidden="true"></i>
+      <%= link_to "ポストする", new_post_path %>
+      </li>     
+    </div>
+    
+    <div class="footer-item">
+      <li>
+      <i class="fa fa-search" aria-hidden="true"></i>
+      <%= link_to "ポスト",  posts_search_form_path %>
+      </li>
+    </div>
+    
+    <div class="footer-item">
+      <li>
+      <i class="fa fa-search" aria-hidden="true"></i>
+      <%= link_to "お店",  '#' %>
+      </li>
+    </div>
+
+    </ul>
+  </nav>
+
+</div>
+</footer>
+
+<% end %>  

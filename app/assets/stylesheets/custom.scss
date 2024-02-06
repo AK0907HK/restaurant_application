@@ -1,0 +1,648 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/* mixins, variables, etc. */
+
+$gray-medium-light: #eaeaea;
+
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box; 
+}
+
+/* common */
+
+body {
+    padding-top: 60px;
+    padding-bottom: 50px;
+    color: #2d3133;
+    background-color: #F8F8FF;
+    margin: 0;
+    min-height: 1vh;
+  }
+  
+  section {
+    overflow: auto;
+  }
+  
+  textarea {
+    resize: vertical;
+  }
+  
+  .center {
+    text-align: center;
+    h1 {
+      margin-bottom: 10px;
+    }
+  }
+  
+  
+
+  /* typography */
+
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1;
+  }
+  
+  h1 {
+    font-size: 3em;
+    letter-spacing: -2px;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  h2 {
+    font-size: 1.2em;
+    letter-spacing: -1px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: normal;
+    color: #777;
+  }
+  
+  p {
+    font-size: 1.1em;
+    line-height: 1.7em;
+    text-align: center;
+  }
+
+  ul, li {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #2d3133;
+    font-size: 14px;
+  }
+
+  @media (max-width:670px){
+    h1{
+      font-size: 30px;}
+
+  }  
+  
+
+  /* header */
+
+#logo {
+    float: left;
+    margin-right: 10px;
+    font-size: 1.7em;
+    color: #fff;
+    letter-spacing: -1px;
+    padding-top: 9px;
+    font-family:"Trebuchet MS";
+    &:hover {
+      color: #fff;
+      text-decoration: none;
+    }
+  }
+  
+
+  header a {
+    color: #fff;
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  /* footer */
+  .icon-font::before{
+    font-family: FontAwesome;
+    content: "\f00b";
+    content: "\f00c";
+    content: "\f075";
+    content: "\f002";
+  }
+
+.footer-list{
+   //padding-right: 320px;
+   padding-left: 350px;
+    display: flex;
+    text-align: center;
+    color: white;
+  }
+
+.footer-item{
+  font-size: 20px;
+  //height: 20px;
+  padding: 10px;
+
+  color: white;
+       a {
+    color: #fff;
+    &:hover {
+    color: #fff;}}
+}  
+
+@media (max-width:670px){
+
+  .footer-list{
+  padding-top: 7px;
+   margin-top: 4px;
+   margin-top: 4px;
+   padding:0;
+  }
+
+  .footer-item{
+    padding: 0;
+    padding-top: 7px;
+    font-size: 10px;
+    margin-right: 3px;
+    margin-left: 3px;
+  }
+
+  }
+
+/* sidebar */
+
+.user_info{
+  padding-top:20px;
+  padding-bottom: 0px;
+  P{
+    font-size: 20px;
+  }
+}  
+
+@media (max-width:670px){
+  .user_info{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-top: 5px;
+    margin-top: 5px;
+    p{
+     font-size: 15px;
+    }
+  }
+}
+
+/* forms */
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+input {
+  height: auto !important;
+}
+
+  
+/* forms */
+
+.form {
+  max-width: 700px;
+  margin: 10px;
+  background-color: white;
+  box-shadow: 0 2px 6px #c1ced7;
+  padding: 50px;
+  border-radius:30px;
+}
+
+@media (max-width:670px){
+  .form{
+    padding: 25px;
+    border-radius:20px;
+
+ }
+
+}  
+
+.form-body {
+  padding: 30px;
+}
+
+#error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .has-error;
+  .form-control {
+    color: $state-danger-text;
+  }
+}
+
+.checkbox {
+  margin-top: -10px;
+  margin-bottom: 10px;
+  span {
+    margin-left: 20px;
+    font-weight: normal;
+  }
+}
+
+#session_remember_me {
+  width: auto;
+  margin-left: 0;
+}
+
+
+/* Dropdown menu */
+
+.dropdown-menu.active {
+  display: block;
+}
+
+/* posts */
+
+
+.posts-index-item {
+  background-color: white;
+  overflow: hidden;
+  border-radius:30px;
+  padding: 20px;
+  
+}
+
+.post-upper-right{
+  padding-left: 100px;
+  padding-top:5px ;  
+}
+.post-user-image {
+  float: left;
+  margin-bottom:10px; 
+}
+
+.post-user {
+  font-size: 18px;
+  //margin-top: 9px;
+}
+
+.post-name {
+  color: blue;
+  font-size:18px;
+  padding-bottom: 15px;
+  //font-family: sans-serif;
+  //text-align: left;
+  //padding-left: 5px;
+}
+
+.post-content{
+  margin: 0;
+  padding-left: 8px;
+  font-size:17px;
+  text-align: left;
+}
+
+.post-time {
+  color: #8899a6;
+  padding-top: 3px;
+  padding-left: 8px;
+  font-size:13px;
+
+}
+
+.post-like{
+  display: inline-block;
+  padding-left: 5px;
+}
+
+
+.post-image{
+//float: center;
+//padding-left: 50px;
+//padding-right: 50px;
+//margin-left: 50px;
+//margin-right: 50px;
+//padding-bottom: 6px;
+}
+
+.post-menus {
+  float: right;
+  font-size: 30px;
+  padding-left: 390px;
+}
+
+.post-bottom{
+  display:flex
+  //padding-left: 5px;
+}
+
+.posts {
+  list-style: none;
+  padding: 0;
+  li {
+    padding: 10px 0;  }
+
+  p{
+    text-align: left;
+
+  }  
+
+}
+
+.unliked-btn {
+  color: #8899a6;
+  background-color: white;
+  border-style: none;
+  font-size: 30px;
+  //padding: 5px;
+  //margin-top:2px;
+  margin: 0;
+  padding: 0;
+  width: 35px;
+  height:35px;
+  float: left;
+}
+
+//
+.liked-btn {
+  color: #ff2581;
+  background-color: white;
+  border-style: none;
+  font-size: 30px;
+  margin: 0;
+  padding: 0;
+ 
+  width: 35px;
+  height:35px;
+  float: left;
+
+}
+
+.user-icon-image{
+  width:100px;
+  height: 100px;
+}
+
+.user-tabs {
+  margin-top: 40px;
+  background-color: white;
+  overflow: hidden;
+  box-shadow: 0 2px 6px #c1ced7;
+}
+
+@media (max-width:670px){
+  .posts-index-item {
+    padding: 10px;
+    border-radius:20px;
+  }
+
+  .post-user-image {
+    margin: 2px;
+    float: left;
+    //margin:5px;
+    
+  
+    
+  }
+  
+  .post-upper-right {
+    padding-right: 20px;
+    padding-left: 10px;
+    padding-top: 10px ;
+    padding-bottom: 3px;
+    text-align: left;
+    display: block;
+    //width: 200px;
+    
+  }
+  
+  
+  .post-user {
+    font-size: 15px;
+  }
+  
+  .post-name {
+    font-size:15px;
+   
+  }
+
+  .post-content{
+    margin:2px 0 2px 0 ;
+    padding: 3px 10px 3px 10px;
+    font-size:14px;
+    display: inline-block;
+
+  }
+  .post-time {
+    color: #8899a6;
+    padding:0 0 0 10px;
+    margin: 0;
+    font-size:14px;
+    display: inline-block;
+  }
+  
+  .post-menus {
+    float: right;
+    margin: 9px 0 0 0;
+    padding: 0 10px 10px 0;
+    font-size: 15px;
+    
+  }
+
+  .post-image{
+    //padding: 0;
+    //margin: 0;
+    //float: center;
+    //padding-left: 50px;
+    //padding-right: 50px;
+    //margin-left: 50px;
+    //margin-right: 50px;
+    //padding-bottom: 6px;
+    //height: 150px;
+    //width: 150px;
+    }
+  .post-bottom{
+    margin-left: 0px;
+  }
+
+  .unliked-btn {
+    font-size: 25px;
+    margin: 0;
+    float: left;
+  }
+  
+
+  .liked-btn {
+    font-size: 25px;
+    margin: 0;
+    float: left;
+  }
+  
+
+  
+}
+
+.user-tabs li {
+  float: left;
+}
+
+.user-tabs li.active {
+  border-bottom: 2px solid #3ecdc6;
+}
+
+.user-tabs li.active a {
+  color: #57575f;
+}
+
+.user-tabs a {
+  display: inline-block;
+  padding: 16px 30px;
+  color: #afb6bf;
+}
+
+/* Restaurant */
+
+.restaurants {
+  list-style: none;
+  padding: 0;
+  li {
+    padding: 10px 0;
+  }
+}
+
+
+.form-restaurant{
+  max-width: 700px;
+  margin: 500px;
+  background-color: white;
+  box-shadow: 0 2px 6px #c1ced7;
+  padding: 20px;
+}
+
+.restaurants-index-item{
+  padding: 25px;
+  background-color: white;
+  overflow: hidden;
+  box-shadow: 0 2px 6px #c1ced7;
+  border-radius:30px;
+}
+
+
+.restaurant-img{
+  float: left;
+  padding-right: 20px;
+}
+
+//.restaurant-upper-right{
+  //.float: left;
+  //padding-left: 20px;
+  //padding-right: 20px;
+  //padding-bottom: 5px;
+//}
+
+.restaurant-name{
+  color: blue;
+  font-size: 17px;
+  //margin: 0 10px 10px 10px;
+}
+
+.restaurant-user{
+  font-size: 13px;
+  padding-left: 5px;
+}
+
+.resturant-coment{
+  //padding: 3px 5px 3px 5px;
+  //display: inline-block;
+  font-size: 17px;
+  text-align: left;
+  padding:5px;
+}
+
+.restaurant-bottom{
+  width:250px;
+  display:flex
+  //padding-top: 8px;
+}
+
+.restrant-info{
+  //float: left;
+  //display: inline-block;
+  font-size:17px;
+  //color: skyblue;
+ 
+  
+}
+
+.restaurant-menu{
+
+  //float: right;
+  //display: inline-block;
+   //font-size:17px;
+  // padding-left: 390px;
+  float: right;
+   padding-bottom: 10px;
+   display: inline-block;
+}
+
+@media (max-width:670px){
+
+  .restaurants-index-item {
+    padding: 20px;
+    border-radius:27px;
+  }
+
+  .restaurant-upper-right{
+    padding:0;
+    margin: 0;
+    //width: 200px;
+    display: block;
+  }
+  
+  .restaurant-name{
+    padding-left: 3px;
+    color: blue;
+    font-size: 16px;
+  }
+  
+  .restaurant-user{
+    font-size: 13px;
+    padding: 0;
+  }
+
+  .resturant-coment{
+    //width: 120px;
+    //float: left;
+    padding: 0 5px 0 5px 0;
+    display: inline-block;
+    //margin-top: auto;
+    //margin-left: 10px;
+    font-size: 15px;
+  }
+  
+  .restaurant-bottom{
+    //width:250px;
+    display: inline-block;
+    //margin-top: 10px;
+    //margin-bottom: 3px;
+    padding-top:8px ;
+    //padding-bottom: 0;
+    //width: 400px;
+   // height: 15px;
+   //padding: 300px 5px 5px 5px;
+   margin-bottom: 10px;
+  }
+  
+  .restrant-info{
+    padding-top: 2px;
+    padding-bottom: 2px;
+    font-size:15px;
+    padding: 0;
+    margin: 0;
+    
+ }
+  
+  .restaurant-menu{
+    font-size:15px;
+    padding: 0;
+    margin: 0;
+    float: right;
+    
+  }
+  
+
+
+}

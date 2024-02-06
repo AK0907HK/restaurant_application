@@ -18,5 +18,14 @@ module RestaurantApp
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+        # 日本語の言語設定。この一行を追加。
+        config.i18n.default_locale = :ja
+
+        config.generators do |g|
+          g.test_framework :rspec,
+            view_specs: false,
+            helper_specs: false,
+            routing_specs: false
+        end   
   end
 end
