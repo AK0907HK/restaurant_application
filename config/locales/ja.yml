@@ -1,0 +1,26 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        nickname: ニックネーム
+        name: "名前"
+        email: "メールアドレス"
+        psssword: "パスワード"
+        Confirmation: "パスワード(確認)"
+      restaurant:
+        restaurant_name: "店名(必須)"
+        area1: "都道府県（必須）"  
+        area2: "市町村(必須)"
+        time: "時間帯"
+        genre: "ジャンル"
+        coment: "コメント"
+      tweet:
+        text: テキスト
+        image: 画像
+      post:
+        name: "店名"
+        content: "ポスト"
+  activemodel:   # Formオブジェクトを用いた場合
+     attributes:
+       order_object:
+         post_code: 郵便番号

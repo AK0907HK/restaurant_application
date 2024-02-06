@@ -6,7 +6,7 @@ before_action :check_admin, only: :destroy
 
   def show
     @user = User.find(params[:id])
-    #@posts = @user.posts.paginate(page:params[:page]) 
+    @posts = @user.posts.paginate(page:params[:page]) 
   end 
 
   def new
