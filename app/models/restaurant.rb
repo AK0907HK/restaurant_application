@@ -16,6 +16,6 @@ class Restaurant < ApplicationRecord
   end  
 
   def self.choose_for(area1,area2,time,genre,user)
-    Restaurant.where(['area1 Like(?) AND area2 Like(?) AND time Like(?) AND genre Like(?) AND user_id Like(?)',"%#{area1}%","%#{area2}%","%#{time}%","%#{genre}%","%#{user}%"])
+    Restaurant.where(['area1 Like(?) AND area2 Like(?) AND time Like(?) AND genre Like(?) AND user_id =?',"%#{area1}%","%#{area2}%","%#{time}%","%#{genre}%",user])
   end 
 end
