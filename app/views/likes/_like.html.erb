@@ -1,6 +1,6 @@
 
 <% post = Post.find_by(id:like.post_id) %>
-
+<% @user = User.find_by(id:post.user_id) %>
 
 <li id="post-<%= post.id %>">
 <div class="posts-index-item">

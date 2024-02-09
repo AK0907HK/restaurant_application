@@ -55,8 +55,8 @@ class PostsController < ApplicationController
       
       #strongparameter
       def post_params
-        #params.require(:post).permit(:name,:content,images: [])
-        params.require(:post).permit(:content,images: [])
+        params.require(:post).permit(:name,:content,images: [])
+        #params.require(:post).permit(:content,images: [])
       end
 
       #ユーザー確認
