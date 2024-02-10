@@ -28,7 +28,7 @@ class Post < ApplicationRecord
 
 
 def image_length
-    if images.length > 3
+    if images.length > 4
       images.purge
       errors.add(:images, "は4枚以内にしてください")
     end

@@ -445,7 +445,7 @@ input {
   .post-image{
     //padding: 0;
     //margin: 0;
-    //float: center;
+    float: center;
     //padding-left: 50px;
     //padding-right: 50px;
     //margin-left: 50px;
@@ -453,6 +453,8 @@ input {
     //padding-bottom: 6px;
     //height: 150px;
     //width: 150px;
+    width: 100%;
+
     }
   .post-bottom{
     margin-left: 0px;
