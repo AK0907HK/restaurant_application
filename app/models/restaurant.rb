@@ -10,6 +10,10 @@ class Restaurant < ApplicationRecord
   #validates :type
   #validates :time
   validates :coment, length: { maximum: 100}
+  validates :image,   content_type: { in: %w[image/jpeg image/gif image/png],
+  message: "対応している画像形式ではありません" },
+size:         { less_than: 5.megabytes,
+  message:   "5MBより大きいファイルを投稿できません" }
 
   def self.search_for(area1,area2,time,genre)
     Restaurant.where(['area1 Like(?) AND area2 Like(?) AND time Like(?) AND genre Like(?)',"%#{area1}%","%#{area2}%","%#{time}%","%#{genre}%"])

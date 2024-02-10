@@ -14,6 +14,10 @@ class User < ApplicationRecord
                     uniqueness: true
   has_secure_password
   validates :password, presence: true, length: { minimum: 8}, allow_nil: true
+  validates :image,   content_type: { in: %w[image/jpeg image/gif image/png],
+  message: "対応している画像形式ではありません" },
+size:         { less_than: 5.megabytes,
+  message:   "5MBより大きいファイルを投稿できません" }
 
   # ハッシュ値を返す
   def User.digest(string)
