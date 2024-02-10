@@ -9,7 +9,7 @@ class Post < ApplicationRecord
   default_scope -> {order(created_at: :desc)}
   validates :user_id, presence: true
   validates :content, presence: true, length: {maximum:300}
-  #validates :name, presence:true,length: {maximum:50}
+  validates :name, presence:true,length: {maximum:50}
   validates :images,   content_type: { in: %w[image/jpeg image/gif image/png],
                                       message: "対応している画像形式ではありません" },
                       size:         { less_than: 5.megabytes,

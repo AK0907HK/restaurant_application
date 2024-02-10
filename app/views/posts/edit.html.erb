@@ -2,6 +2,7 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
+  <div class="form">
     <%= form_with(model: @post) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
       <%= f.label :name %>
@@ -15,5 +16,6 @@
       <p>画像のアップロード</p>
       <%= f.submit "編集する", class: "btn btn-primary" %>
     <% end %>
+    </div>
   </div>
 </div>

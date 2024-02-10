@@ -13,7 +13,7 @@
             <% end %>
           </div>
           <div class="restaurant-upper-right">
-          <%= link_to @restaurant.name,restaurant_path(@restaurant) , data: {turbolinks: false} ,class:"restaurant-name" %>
+          <%= link_to @restaurant.name,restaurant_path(@restaurant) , data: {turbo: false} ,class:"restaurant-name" %>
        
             <div class="restaurant-user">
               <% @user = User.find_by(id:@restaurant.user_id) %>

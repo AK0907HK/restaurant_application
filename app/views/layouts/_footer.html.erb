@@ -8,15 +8,16 @@
     <div class="footer-item">
       <li>
       <i class="fa fa-th-list" aria-hidden="true"></i>
-      <%= link_to "お店登録",  '#' %>
+      <%= link_to "お店登録",  new_restaurant_path , data: { turbo: false } %>
       </li> 
     </div>
 
     <div class="footer-item">   
       <li>
       <i class="fa fa-check" aria-hidden="true"></i>
-      <%= link_to "お店選択", '#' %>
+      <%= link_to "お店選択", restaurants_choose_form_path %>
       </li>
+      
     </div>  
 
     <div class="footer-item">
@@ -36,7 +37,7 @@
     <div class="footer-item">
       <li>
       <i class="fa fa-search" aria-hidden="true"></i>
-      <%= link_to "お店",  '#' %>
+      <%= link_to "お店",  restaurants_search_form_path %>
       </li>
     </div>
 
