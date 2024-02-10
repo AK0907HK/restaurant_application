@@ -6,7 +6,8 @@
       <p>
      
       <% if @user.image.attached? %>
-      <%= image_tag @user.image  %>
+      <%= image_tag @user.image.variant( resize: "80x80^", gravity: "center", crop: "100x100+0+0" )  %>
+      
       <% else %>
         <%=  image_tag 'ディフォルト画像.png' ,class:"user-icon-image" %>
       <% end %> 
