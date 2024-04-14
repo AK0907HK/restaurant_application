@@ -4,8 +4,6 @@
 <p>アカウント作成完了の為に、以下のリンクをクリックしてください。</p>
 
 
+<%= link_to "アカウントの有効化はこちら", edit_account_activation_url(@user.activation_token,email: @user.email) %>                                                    
 
-<%= link_to "アカウントの有効化はこちら", edit_account_activation_url(@user.activation_token,
-                                                    email: @user.email) %>
-
-<p>また、本メールに心当たりのない方は無視してください。</p> 
+<p>また、本メールに心当たりのない方はお読み捨てください。</p>  
