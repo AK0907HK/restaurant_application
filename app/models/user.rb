@@ -45,7 +45,7 @@ size:         { less_than: 5.megabytes,
   #有効化のためのメールを送る
   def send_activation_email
     UserMailer.account_activation(self).deliver_now
-  end
+  end 
 
   # パスワード再設定の属性を設定する
   def create_reset_digest
