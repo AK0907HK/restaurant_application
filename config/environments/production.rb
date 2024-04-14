@@ -89,7 +89,7 @@ Rails.application.configure do
     :domain         => 'restaurantaplication.heroku.com',
     :authentication => :plain,
   }
-
+  config.action_mailer.default_url_options = { host: 'restaurantaplication.heroku.com'}
   # Use a different logger for distributed setups.
   # require "syslog/logger"
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new "app-name")
