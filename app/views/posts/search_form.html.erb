@@ -53,7 +53,7 @@
       
       
           
-        <% end %>  
+        <% end %>   
       </div>
       
         <div class="post-time">
@@ -61,10 +61,10 @@
         </div>    
       
         <div class="post-bottom"> 
-            <% if Like.find_by(user_id: @user.id, post_id: post.id) %>
-              <%= button_to "♥", like_path(post.id), {method: :delete , class: "liked-btn" ,params:{user_id:@user.id,post_id:post.id}}  %>
+            <% if Like.find_by(user_id: current_user.id, post_id: post.id) %>
+              <%= button_to "♥", like_path(post.id), {method: :delete , class: "liked-btn" ,params:{user_id:current_user.id,post_id:post.id}}  %>
             <% else %>
-              <%= button_to  "♥", likes_path(post.id), {method: :post,class: "unliked-btn",params:{user_id:@user.id,post_id:post.id}}  %>
+              <%= button_to  "♥", likes_path(post.id), {method: :post,class: "unliked-btn",params:{user_id:current_user.id,post_id:post.id}}  %>
             <% end %>
             <div class="post-menus">
             <% if current_user?(post.user) %>
@@ -77,7 +77,7 @@
     </li>
   <% end %>
   </ol>
-    <%= will_paginate @posts %>
+    
   </div>
 </div>
 
