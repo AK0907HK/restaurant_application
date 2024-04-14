@@ -86,7 +86,8 @@ Rails.application.configure do
     :address        => ENV['MAILGUN_SMTP_SERVER'],
     :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
     :password       => ENV['MAILGUN_SMTP_PASSWORD'],
-    :domain         => 'restaurantaplication.heroku.com',
+    #:domain         => 'restaurantaplication.heroku.com',
+    :domain         => 'heroku.com',
     :authentication => :plain,
   }
   config.action_mailer.default_url_options = { host: 'restaurantaplication.heroku.com'}
