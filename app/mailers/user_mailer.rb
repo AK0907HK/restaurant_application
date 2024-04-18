@@ -1,4 +1,4 @@
-class UserMailer < ApplicationMailer
+class UserMailer < ApplicationMailer 
 
   #メールアドレスの有効化
   def account_activation(user)

@@ -86,10 +86,13 @@ Rails.application.configure do
     :address        => ENV['MAILGUN_SMTP_SERVER'],
     :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
     :password       => ENV['MAILGUN_SMTP_PASSWORD'],
-    :domain         => 'restaurantaplication.heroku.com',
+    #:domain         => 'restaurantaplication.heroku.com',
+    :domain         => 'restaurantaplication-85826252b2fb.herokuapp.com',
     :authentication => :plain,
   }
-
+  #config.action_mailer.default_url_options = { host: 'restaurantaplication.heroku.com'}
+  config.action_mailer.default_url_options = { host: 'restaurantaplication-85826252b2fb.herokuapp.com'}
+  config.action_mailer.delivery_method = :smtp
   # Use a different logger for distributed setups.
   # require "syslog/logger"
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new "app-name")

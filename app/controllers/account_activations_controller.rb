@@ -12,6 +12,6 @@ class AccountActivationsController < ApplicationController
       flash[:danger] = "無効なリンクです"
       redirect_to root_url
     end
-    
+     
   end  
 end
