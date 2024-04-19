@@ -22,6 +22,7 @@ https://restaurantaplication-85826252b2fb.herokuapp.com/
 お気に入り機能
 
 
-## 画面遷移図
-
+## 画面設計図
+https://docs.google.com/document/d/1CA9d37nm8plLWLYq--X3EqLk2Tda6YeLke-3rhZy4e8/edit?usp=sharing
 ## ER図
+https://docs.google.com/spreadsheets/d/1ccJjuL7yKKyiZBmzMQFPr0-0zuEShTpMUaSPIfCMP60/edit?usp=sharing
