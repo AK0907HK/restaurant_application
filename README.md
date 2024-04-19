@@ -15,6 +15,19 @@ https://restaurantaplication-85826252b2fb.herokuapp.com/
 
 ## 機能一覧
 
+メールアドレスとパスワードを利用したユーザー登録 / ログイン機能
+ユーザー情報変更機能
+パスワード再設定機能
+ゲストユーザー機能
+お店の取得 / 作成 / 更新 / 削除機能
+お店の自動選択機能
+お店の検索機能
+ポストの取得 / 作成 / 更新 / 削除機能
+ポストの検索機能
+ポストのいいね取得/削除機能
+ページネーション機能
+画像のアップロード機能（ユーザー、お店、ポスト）
+
 会員登録・ログイン
 新規投稿
 検索（フリーワード・タグ・ベストシーズンによる検索）
@@ -26,6 +39,12 @@ https://restaurantaplication-85826252b2fb.herokuapp.com/
 その後の機能
 お気に入り機能
 
+##使用技術
+開発用PC：windows11
+バックエンド：ruby 3.1.0 Rails 7.1.2 Rspec 5.1.1
+フロントエンド：javascript,html/css,bootstrap-sass 3.4.1
+DB:Sqlite3
+デプロイ先（予定）:render ※余裕があればAWS
 
 ## 画面設計図
 https://docs.google.com/document/d/1CA9d37nm8plLWLYq--X3EqLk2Tda6YeLke-3rhZy4e8/edit?usp=sharing
