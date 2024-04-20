@@ -37,12 +37,12 @@ https://restaurantaplication-85826252b2fb.herokuapp.com/
 
 
 ## 使用技術
-開発用PC：windows11
-バックエンド：ruby 3.1.0 Rails 7.0.3 Rspec 5.1.1
-フロントエンド：javascript,jquery,html,css,bootstrap-sass 3.4.1
-外部API:GoogleMapAPI
-DB:PostgreSQL 1.3.5
-本番環境:heroku,s3
+* 開発用PC：windows11
+* バックエンド：ruby 3.1.0 Rails 7.0.3 Rspec 5.1.1
+* フロントエンド：javascript,jquery,html,css,bootstrap-sass 3.4.1
+* 外部API:GoogleMapAPI
+* DB:PostgreSQL 1.3.5
+* 本番環境:heroku,s3
 
 ## 画面設計図
 https://docs.google.com/document/d/1CA9d37nm8plLWLYq--X3EqLk2Tda6YeLke-3rhZy4e8/edit?usp=sharing
