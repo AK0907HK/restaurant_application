@@ -9,7 +9,7 @@
 またお店の自動選択機能以外にも、SNS風の側面も持ち、ポストの投稿・編集・削除・いいね機能なども実装します。
 
 サービスURl:
-https://restaurantaplication-85826252b2fb.herokuapp.com/
+https://restaurantaplication-85826252b2fb.herokuapp.com
 ## 開発背景
 私の場合なのですが、勤め先ではお昼ご飯の時間が自由で、そのため同僚の方と時間が合うことが少なかったです。
 一人で駅中を回ってみても選択肢が多く、判断に迷うことがありました。
