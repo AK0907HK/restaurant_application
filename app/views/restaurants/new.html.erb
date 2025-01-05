@@ -25,13 +25,15 @@
       </div>
 
       <div>
+        <% @timing = Timing.all %>
         <%= f.label :time, class: "block font-medium text-gray-700 text-lg" %>
-        <%= f.select :time, ["いつでも", "朝", "昼", "夜"], include_blank: "", class: "mt-1 block w-full border-2 border-gray-90 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 px-2" %>
+        <%= f.collection_select :timing, @timing, :id, :timing, { include_blank: "", selected: params[:timing] }, { id: "timigSelect", class: "mt-1 block w-full border-2 border-gray-90 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 px-2" } %>
       </div>
 
       <div>
+        <% @genre = Genre.all %>
         <%= f.label :genre, class: "block font-medium text-gray-700 text-lg" %>
-        <%= f.select :genre, ["和食", "洋食", "中華", "ラーメン", "カレー", "焼肉", "居酒屋", "カフェ", "パン", "スイーツ", "その他"], include_blank: "", class: "mt-1 block w-full border-2 border-gray-90 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 px-2" %>
+        <%= f.collection_select :genre, @genre, :id, :genre, { include_blank: "", selected: params[:genre] }, { id: "genreSelect", class: "mt-1 block w-full border-2 border-gray-90 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 px-2" } %>
       </div>
 
       <div>
