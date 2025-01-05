@@ -61,3 +61,5 @@ end
 #  gem "pg",         "1.3.5"
 #  gem "aws-sdk-s3", "1.114.0", require: false
 #end
+gem "tailwindcss-rails", "~> 3.1"
+gem 'cssbundling-rails'
