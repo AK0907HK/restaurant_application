@@ -17,7 +17,7 @@
   </head>
   <body class="bg-gray-100"> 
     <%= render 'layouts/header' %>
-    <div class="w-full max-w-4xl mx-auto">  <!-- 中央揃えのために mx-auto を追加 -->
+    <div class="w-full max-w-4xl mx-auto"> 
       <% flash.each do |message_type, message| %>
         <div class="alert alert-<%= message_type %>"><%= message %></div>
       <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_05_120405) do
+ActiveRecord::Schema[7.0].define(version: 2025_01_05_005119) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -52,6 +52,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_05_120405) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["area1_id"], name: "index_area2s_on_area1_id"
+  end
+
+  create_table "genres", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "genre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "likes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -101,6 +107,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_05_120405) do
     t.float "lng"
     t.index ["user_id"], name: "index_restaurants_on_user_id"
     t.index ["user_r_id", "created_at"], name: "index_restaurants_on_user_r_id_and_created_at"
+  end
+
+  create_table "timings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "timing"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
