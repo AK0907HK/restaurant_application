@@ -1,60 +1,73 @@
-<h1>お店を登録する</h1>
+<h1 class="text-3xl font-bold text-center my-8 pt-16">お店を登録する</h1>
 
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <div class="form">
-      <%= form_with(model: @restaurant) do |f| %>
-        <%= render 'shared/error_messages', object: f.object %>
+<div class="flex justify-center items-center min-h-screen">
+  <div class="w-full max-w-4xl bg-white shadow-md p-6 rounded-md rounded-xl">
+    <%= form_with(model: @restaurant, class: "space-y-4") do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
 
-        <%= f.label :restaurant_name %>
-        <%= f.text_field :name ,id:'restaurant-name' %>
-      
+      <div>
+        <%= f.label :restaurant_name, class: "block font-medium text-gray-700 text-lg" %>
+        <%= f.text_field :name, id: 'restaurant-name', class: "mt-1 block w-full border-2 border-gray-90 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 px-2" %>
+      </div>
+
+      <div>
         <% @prefecture = Area1.all %>
+        <%= f.label :area1, class: "block font-medium text-gray-700 text-lg" %>
+        <%= f.collection_select :area1, @prefecture, :id, :name, { include_blank: "", selected: params[:area1] }, { id: "prefectureSelect", class: "mt-1 block w-full border-2 border-gray-90 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 px-2" } %>
+      </div>
 
-        <%= f.label :area1 %>
-        <%= f.collection_select :area1, @prefecture , :id, :name, { include_blank: "",selected: params[:area1]}, { id: "prefectureSelect" }    %>
-      
+      <div>
         <% area2 = Area2.all %>
-        <% @cities_json = area2.map{|o| o.attributes.symbolize_keys.select{|k,v| k.match(/(id|area1_id|city)\z/) } } %>
-        <%  @cities = Area2.where(area1_id: params[:area1])%>
+        <% @cities_json = area2.map { |o| o.attributes.symbolize_keys.select { |k, v| k.match(/(id|area1_id|city)\z/) } } %>
+        <% @cities = Area2.where(area1_id: params[:area1]) %>
+        <%= f.label :area2, class: "block font-medium text-gray-700 text-lg" %>
+        <%= f.collection_select :area2, @cities, :id, :city, { include_blank: "", selected: params[:area2] }, { id: "citySelect", class: "mt-1 block w-full border-2 border-gray-90 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 px-2", data: { json: @cities_json } } %>
+      </div>
+
+      <div>
+        <%= f.label :time, class: "block font-medium text-gray-700 text-lg" %>
+        <%= f.select :time, ["いつでも", "朝", "昼", "夜"], include_blank: "", class: "mt-1 block w-full border-2 border-gray-90 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 px-2" %>
+      </div>
+
+      <div>
+        <%= f.label :genre, class: "block font-medium text-gray-700 text-lg" %>
+        <%= f.select :genre, ["和食", "洋食", "中華", "ラーメン", "カレー", "焼肉", "居酒屋", "カフェ", "パン", "スイーツ", "その他"], include_blank: "", class: "mt-1 block w-full border-2 border-gray-90 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 px-2" %>
+      </div>
+
+      <div>
+        <%= f.label :coment, class: "block font-medium text-gray-700 text-lg" %>
+       <%= f.text_area :coment, id: 'coment', class: "mt-1 block w-full border-2 border-gray-90 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 px-4 h-24 text-start leading-tight" %></div>
+     
+      <%= f.hidden_field :lat, id:'lat' %>
+      <%= f.hidden_field :lng, id:'lng' %>
+
+      <div>
+        <%= f.label :image, class: "block font-medium text-gray-700 text-lg" %>
+        <div class="relative">
+          <%= f.file_field :image, class: "absolute opacity-0 cursor-pointer" %>
+          <div class="text-xlmt-1  border-2 border-gray-300 rounded-md py-3 px-6 bg-sky-600 text-white text-center font-semibold cursor-pointer hover:bg-blue-600">
+            <span>ファイル選択</span>
+          </div>
+        </div>
+      </div>
       
-        <%= f.label :area2 %>
-        <%= f.collection_select :area2, @cities, :id, :city, { include_blank: "" ,selected: params[:area2]} , { id: "citySelect" , data: { json: @cities_json }} %>
-      
-        <%= f.label :time %>
-        <%= f.select :time, ["いつでも","朝","昼","夜"], include_blank: "" %>
+      <%= f.submit "お店を追加", class: "text-xl w-full py-2 px-4 bg-sky-600 text-white font-medium rounded-md shadow hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" %>
+    <% end %>
 
-        <%= f.label :genre %>
-        <%= f.select :genre, ["和食","洋食","中華","ラーメン","カレー","焼肉","居酒屋","カフェ","パン","スイーツ","その他"], include_blank: "" %>
+    <!-- 地図情報部分をフォームの中に配置 -->
+    <h2 class="text-xl text-center font-light text-gray-600 my-4">地図情報を追加したい場合はこちら！</h2>
+    <div class="space-y-4">
+      <input id="address" type="textbox" value="東京駅 ランチ" class="block w-full border-2 border-gray-90 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-3 px-4" />
+      <input type="button" value="検索" onclick="codeAddress()" class="text-xl block w-full py-2 px-4 bg-sky-600 text-white font-medium rounded-md shadow hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" />
+    </div>
 
-        <%= f.label :coment %>
-        <%= f.text_field :coment ,id:'coment' %>
-
-       
-        <%= f.hidden_field :lat, id:'lat' %>
-       
-        <%= f.hidden_field :lng, id:'lng' %>
-      
-        <%= f.label :画像のアップロード %>
-        <span class="image">
-          <%= f.file_field :image %>
-        </span>
-
-        <%= f.submit "お店を追加", class: "btn btn-primary" %>
-      <% end %>
-      <h2>地図情報を追加したい場合はこちら！</h2>
-      <input id="address" type="textbox" value="東京駅　ランチ">
-      <input type="button" value="検索" onclick="codeAddress()">
-      <div id='map'></div>
-      <style>
-      #map {height: 420px;
-      width: 100%;
-      }
-     </style>
-
-    </div>  
-  </div> 
+    <div id="map" class="w-full h-96 mt-4 border rounded-md"></div>
+  </div>
 </div>
+
+
+
+
 
 <script>
 //連動セレクトボックス

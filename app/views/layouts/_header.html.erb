@@ -1,28 +1,42 @@
-<header class="navbar navbar-fixed-top bg-primary">
-<div class="container">
-  <%= link_to "RestaurantChooser", root_path , id: "logo" %>
-  <nav>
-    <ul class="nav navbar-nav  navbar-right">
- 
-      <% if logged_in? %>
-          <li class="dropdown">
-            <a href="#" id="account" class="dropdown-toggle">
+<header class="bg-sky-600 fixed top-0 w-full z-50 shadow-md">
+  <div class="container mx-auto px-4 py-2 flex justify-between items-center">
+    <%= link_to "RestaurantChooser", root_path, id: "logo", class: "text-white text-lg font-semibold" %>
+    <nav>
+      <ul class="flex space-x-6">
+        <% if logged_in? %>
+          <li class="relative">
+            <button id="account" class="text-white hover:text-gray-300 focus:outline-none">
               アカウント <b class="caret"></b>
-            </a>
-            <ul id="dropdown-menu" class="dropdown-menu">
-              <li><%= link_to "プロフィール", current_user %></li>
-              <li><%= link_to "設定", edit_user_path(current_user) %></li>
-              <li class="divider"></li>
+            </button>
+            <ul id="dropdown-menu" class="absolute hidden bg-white text-black rounded shadow-md mt-2 w-48">
+              <li><%= link_to "プロフィール", current_user, class: "block px-4 py-2" %></li>
+              <li><%= link_to "設定", edit_user_path(current_user), class: "block px-4 py-2" %></li>
+              <li class="border-t border-gray-200"></li>
               <li>
-                <%= link_to "ログアウト", logout_path,
-                                       data: { "turbo-method": :delete } %>
+                <%= link_to "ログアウト", logout_path, data: { "turbo-method": :delete }, class: "block px-4 py-2 text-red-600" %>
               </li>
             </ul>
           </li>
         <% else %>
-          <li><%= link_to "ログイン", login_path %></li>
+          <li><%= link_to "ログイン", login_path, class: "text-white hover:text-gray-300" %></li>
         <% end %>
       </ul>
-  </nav>
-</div>
+    </nav>
+  </div>
 </header>
+
+<script>
+  // JavaScript for dropdown toggle
+  document.querySelector("#account").addEventListener("click", function () {
+    const dropdown = document.querySelector("#dropdown-menu");
+    dropdown.classList.toggle("hidden");
+  });
+
+  // Close dropdown if clicked outside
+  document.addEventListener("click", function (e) {
+    if (!e.target.closest("#account") && !e.target.closest("#dropdown-menu")) {
+      const dropdown = document.querySelector("#dropdown-menu");
+      dropdown.classList.add("hidden");
+    }
+  });
+</script>
