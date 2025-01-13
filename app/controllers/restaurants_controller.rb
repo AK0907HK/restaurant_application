@@ -21,10 +21,10 @@ class RestaurantsController < ApplicationController
   def create
     @prefecture = Area1.all
     @restaurant =  current_user.restaurants.build(restaurant_params)
-    @restaurant.image.attach(params[:restaurant][:image])
+    @restaurant.images.attach(params[:restaurant][:images])
     if @restaurant.save
       flash[:success] = "お店のリストを追加しました！"
-      redirect_to restaurants_path
+      redirect_to restaurants_choose_form_path
     else
       render 'new', status: :unprocessable_entity
     end  
@@ -54,9 +54,9 @@ class RestaurantsController < ApplicationController
   def choose
     @area1 = params[:area1] 
     @area2 = params[:area2] 
-    @time = params[:time] 
+    @timing = params[:timing] 
     @genre = params[:genre] 
-    @restaurants = Restaurant.choose_for(@area1,@area2,@time,@genre,current_user.id )
+    @restaurants = Restaurant.choose_for(@area1,@area2,@timing,@genre,current_user.id )
     @rand = rand(@restaurants.count)                  
     @restaurant = @restaurants[@rand]
   end  
@@ -64,7 +64,7 @@ class RestaurantsController < ApplicationController
   def search
     @area1 = params[:area1] 
     @area2 = params[:area2] 
-    @time = params[:time]  
+    @timing = params[:timing]  
     @genre = params[:genre] 
     @restaurants_list = Restaurant.search_for(@area1,@area2,@time,@genre) 
     @restaurants = Restaurant.all.paginate(page: params[:page])
@@ -89,7 +89,7 @@ class RestaurantsController < ApplicationController
       
   #strongparameter
   def restaurant_params
-    params.require(:restaurant).permit(:name,:area1,:area2,:time,:genre,:coment,:lat,:lng)
+    params.require(:restaurant).permit(:name,:area1,:area2,:timing,:genre,:coment,:lat,:lng)
 
   end
 

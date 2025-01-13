@@ -16,7 +16,7 @@ class Post < ApplicationRecord
                                       message:   "5MBより大きいファイルを投稿できません" }
   validate :image_length
 
-
+ 
   
   
   #検索用                                   

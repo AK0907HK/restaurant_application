@@ -13,6 +13,37 @@
  *= require_tree .
  *= require_self
  */
+ @import "swiper-bundle.min";
+
+ 
 body {
   font-family: 'Noto Sans JP', sans-serif;
 }
+/* app/assets/stylesheets/application.scss に追加 */
+.swiper {
+  width: 60%;  /* 最大幅を70%に設定 */
+  margin: 0 auto;  /* 中央寄せ */
+  height: 400px;  /* 必要に応じて調整 */
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;  /* 画像がはみ出さないように調整 */
+}
+
+.swiper-button-next, .swiper-button-prev {
+  color: #000;
+  z-index: 10;
+}
+
+.swiper-pagination-bullet {
+  background-color: #000;
+}
+

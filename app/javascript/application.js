@@ -7,3 +7,23 @@ import "custom/menu"
 
 import jquery from "jquery"
 window.$ = jquery
+
+//import { Swiper, SwiperSlide } from "swiper";  // 正しくSwiperをインポート
+//import 'swiper/swiper-bundle.min.css';  // CSSのインポート
+
+//import Swiper from "swiper";
+//import "swiper/swiper-bundle.min.css";  // SwiperのCSS
+
+
+//import Swiper from "swiper";
+//import "swiper/swiper-bundle.min.css";
+//import 'swiper/css';
+////import Swiper from "swiper";
+//import Swiper from "swiper";
+//import "swiper/swiper-bundle.min.css";
+//import Swiper, { Navigation, Pagination } from 'swiper';
+
+// Import Swiper styles
+//import 'swiper/css';
+//import 'swiper/css/navigation';
+//import 'swiper/css/pagination';

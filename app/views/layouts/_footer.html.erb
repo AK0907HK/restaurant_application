@@ -3,6 +3,7 @@
     <div class="container mx-auto px-4">
       <nav>
         <ul class="flex justify-around space-x-4">
+
           <li class="flex items-center">
             <i class="fa fa-th-list mr-2" aria-hidden="true"></i>
             <%= link_to "お店登録", new_restaurant_path, data: { turbo: false }, class: "hover:text-gray-200" %>
@@ -11,11 +12,6 @@
           <li class="flex items-center">
             <i class="fa fa-check mr-2" aria-hidden="true"></i>
             <%= link_to "お店選択", restaurants_choose_form_path, class: "hover:text-gray-200" %>
-          </li>
-
-          <li class="flex items-center">
-            <i class="fa fa-comment mr-2" aria-hidden="true"></i>
-            <%= link_to "ポストする", new_post_path, class: "hover:text-gray-200" %>
           </li>
 
           <li class="flex items-center">

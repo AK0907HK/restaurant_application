@@ -40,3 +40,4 @@ class SessionsController < ApplicationController
         redirect_to  user
     end
 end
+ 
