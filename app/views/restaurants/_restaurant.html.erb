@@ -1,46 +1,48 @@
-<li id="restaurant-<%= restaurant.id %>">
-  
-  <div class="restaurants-index-item">
-    <div class="restaurant-img">
-      <% if restaurant.image.attached? %>
-        <%= image_tag restaurant.image.variant( resize: "50x50^", gravity: "center", crop: "100x100+0+0" )  %>
-      <% else %>
-        <%=  image_tag 'ディフォルト画像2.png' ,:size =>'50x50' %>
-      <% end %>
+<li id="restaurant-<%= restaurant.id %>" class="mb-4">
+  <div class="bg-white shadow-md rounded-lg p-4 flex items-center space-x-4">
+    <!-- 画像部分 -->
+    <div class="restaurant-img flex-shrink-0">
+    <% if restaurant.images.attached? %>
+  <%= image_tag restaurant.images.first.variant(resize: "50x50^", gravity: "center", crop: "100x100+0+0"), class: "w-16 h-16 rounded-full object-cover" %>
+<% else %>
+  <%= image_tag 'ディフォルト画像2.png', size: '50x50', class: "w-16 h-16 rounded-full object-cover" %>
+<% end %>
+ 
     </div>
-    <div class="restaurant-upper-right">
-  
-        <%= link_to restaurant.name,restaurant_path(restaurant) , data: {turbo: false} ,class:"restaurant-name" %>
-   
-      <div class="restaurant-user">
-        <%= image_tag @user.image.variant( resize: "30x30^", gravity: "center", crop: "100x100+0+0" ) if @user.image.attached? %>
-        <span class="user"><%= @user.name %></span>
-      </div>  
-    </div> 
 
-    <div = "restaurant-bottom">
-      <div class = "restrant-info">
-        <% area1 = Area1.find_by(id:restaurant.area1) %>
-          <%= "#" + "#{area1.name}" %>
-        <% area2 = Area2.find_by(id:restaurant.area2) %>
-        <% if area2  %>
-        <%= "#" + "#{area2.city}" %>
-        <% else %>
-         <% " " %> 
-        <% end %> 
-
-        <% if restaurant.genre  != ""  %>
-          <%= "#" + "#{restaurant.genre}" %>
-        <% else %>
-          <% " " %> 
-        <% end %> 
-        <% if restaurant.time != "" %>
-          <%= "#" + "#{restaurant.time}" %>
-        <% else %>
-          <% " " %> 
-        <% end %> 
+    <!-- 全体を垂直方向で揃える -->
+    <div class="flex-grow flex flex-col justify-between">
+      <!-- レストラン名 -->
+      <div>
+        <%= link_to restaurant.name, restaurant_path(restaurant), data: { turbo: false }, class: "text-lg font-bold text-blue-600 hover:underline" %>
       </div>
+
+      <!-- ユーザー情報 -->
+      <div class="restaurant-user flex items-center space-x-2 mt-2">
+        <% if @user.image.attached? %>
+          <%= image_tag @user.image.variant(resize: "30x30^", gravity: "center", crop: "100x100+0+0"), class: "w-8 h-8 rounded-full object-cover" %>
+        <% end %>
+        <span class="text-sm text-gray-700"><%= @user.name %></span>
+      </div>
+    </div>
+
+    <!-- 詳細情報 -->
+    <div class="flex flex-wrap gap-2 text-sm text-gray-500">
+      <% area1 = Area1.find_by(id: restaurant.area1) %>
+      <% area2 = Area2.find_by(id: restaurant.area2) %>
+      <% timing = Timing.find_by(id: restaurant.timing) %>
+      <% genre = Genre.find_by(id: restaurant.genre) %>
+      <% details = [] %>
+      <% details << "#" + area1.name if area1 %>
+      <% details << "#" + area2.city if area2 %>
+      <% details << "#" + timing.timing if timing %>
+      <% details << "#" + genre.genre if genre %>
       
+      <% details.each do |detail| %>
+        <span class="px-2 py-1 bg-blue-100 rounded-lg text-blue-600">
+          <%= detail %>
+        </span>
+      <% end %>
     </div>
   </div>
 </li>

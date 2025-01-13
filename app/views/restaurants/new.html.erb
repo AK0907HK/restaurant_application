@@ -1,7 +1,7 @@
 <h1 class="text-3xl font-bold text-center my-8 pt-16">お店を登録する</h1>
 
 <div class="flex justify-center items-center min-h-screen">
-  <div class="w-full max-w-4xl bg-white shadow-md p-6 rounded-md rounded-xl">
+  <div class="w-full max-w-4xl bg-white shadow-md p-6 my-8 rounded-md rounded-xl">
     <%= form_with(model: @restaurant, class: "space-y-4") do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
@@ -26,10 +26,10 @@
 
       <div>
         <% @timing = Timing.all %>
-        <%= f.label :time, class: "block font-medium text-gray-700 text-lg" %>
+        <%= f.label :timing, class: "block font-medium text-gray-700 text-lg" %>
         <%= f.collection_select :timing, @timing, :id, :timing, { include_blank: "", selected: params[:timing] }, { id: "timigSelect", class: "mt-1 block w-full border-2 border-gray-90 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 px-2" } %>
       </div>
-
+ 
       <div>
         <% @genre = Genre.all %>
         <%= f.label :genre, class: "block font-medium text-gray-700 text-lg" %>
@@ -45,16 +45,16 @@
 
       <div>
         <%= f.label :image, class: "block font-medium text-gray-700 text-lg" %>
-        <div class="relative">
-          <%= f.file_field :image, class: "absolute opacity-0 cursor-pointer" %>
-          <div class="text-xlmt-1  border-2 border-gray-300 rounded-md py-3 px-6 bg-sky-600 text-white text-center font-semibold cursor-pointer hover:bg-blue-600">
-            <span>ファイル選択</span>
-          </div>
-        </div>
+ 
+
+         <%= f.file_field :images, multiple: true, accept: "image/jpeg,image/gif,image/png", class:  %>
+        
+
+
+
       </div>
       
-      <%= f.submit "お店を追加", class: "text-xl w-full py-2 px-4 bg-sky-600 text-white font-medium rounded-md shadow hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" %>
-    <% end %>
+
 
     <!-- 地図情報部分をフォームの中に配置 -->
     <h2 class="text-xl text-center font-light text-gray-600 my-4">地図情報を追加したい場合はこちら！</h2>
@@ -64,6 +64,8 @@
     </div>
 
     <div id="map" class="w-full h-96 mt-4 border rounded-md"></div>
+          <%= f.submit "お店を追加", class: "text-xl w-full py-2 px-4 bg-sky-600 text-white font-medium rounded-md shadow hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" %>
+    <% end %>
   </div>
 </div>
 

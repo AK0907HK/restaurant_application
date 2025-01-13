@@ -11,7 +11,7 @@ ja:
         restaurant_name: "店名(必須)"
         area1: "都道府県（必須）"  
         area2: "市町村"
-        time: "時間帯"
+        timing: "時間帯"
         genre: "ジャンル"
         coment: "ポスト"
         image: 画像

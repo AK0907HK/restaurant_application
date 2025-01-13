@@ -1,39 +1,49 @@
-<h1>お店を選択する</h1>
- 
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-  <div class="form">  
+<h1 class="text-3xl font-bold text-center my-8 pt-8">お店を選択する</h1>
+
+
+<div class="flex justify-center items-center">
+  <div class="w-full max-w-4xl bg-white shadow-md p-6 rounded-md rounded-xl my-8">
     <%= form_with(url: "/restaurants/choose", method: :get) do |f| %>
       
-      
+      <div>
         <% @prefecture = Area1.all %>
+        <%= f.label :area1, I18n.t("activerecord.attributes.restaurant.area1"), class: "block font-medium text-gray-700 text-lg" %>
+        <%= f.collection_select :area1, @prefecture, :id, :name, { include_blank: "", selected: params[:area1] }, { id: "prefectureSelect", class: "mt-1 block w-full border-2 border-gray-90 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 px-2" } %>
+      </div>
 
-        <%= f.label :都道府県 %>
-        <%= f.collection_select :area1, @prefecture , :id, :name, { include_blank: "",selected: params[:area1]}, { id: "prefectureSelect" }    %>
-    
+      <div>
         <% area2 = Area2.all %>
-        <% @cities_json = area2.map{|o| o.attributes.symbolize_keys.select{|k,v| k.match(/(id|area1_id|city)\z/) } } %>
-        <%  @cities = Area2.where(area1_id: params[:area1])%>
-    
-        <%= f.label :市町村 %>
-        <%= f.collection_select :area2, @cities, :id, :city, { include_blank: "" ,selected: params[:area2]} , { id: "citySelect" , data: { json: @cities_json }} %>
-    
-        <%= f.label :時間 %>
-        <%= f.select :time, ["いつでも","朝","昼","夜"], include_blank: "" %>
+        <% @cities_json = area2.map { |o| o.attributes.symbolize_keys.select { |k, v| k.match(/(id|area1_id|city)\z/) } } %>
+        <% @cities = Area2.where(area1_id: params[:area1]) %>
+        <%= f.label :area2, I18n.t("activerecord.attributes.restaurant.area2"), class: "block font-medium text-gray-700 text-lg" %>
+        <%= f.collection_select :area2, @cities, :id, :city, { include_blank: "", selected: params[:area2] }, { id: "citySelect", class: "mt-1 block w-full border-2 border-gray-90 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 px-2", data: { json: @cities_json } } %>
+      </div>
 
-        <%= f.label :ジャンル %>
-        <%= f.select :genre, ["和食","洋食","中華","ラーメン","カレー","焼肉","居酒屋","カフェ","パン","スイーツ","その他"], include_blank: "" %>
+      <div>
+        <% @timing = Timing.all %>
+         <%= f.label :timing, I18n.t("activerecord.attributes.restaurant.timing"), class: "block font-medium text-gray-700 text-lg" %>
+        <%= f.collection_select :timing, @timing, :id, :timing, { include_blank: "", selected: params[:timing] }, { id: "timigSelect", class: "mt-1 block w-full border-2 border-gray-90 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 px-2" } %>
+      </div>
 
-        <%= f.submit "お店を選択する", class: "btn btn-primary" %>
+      <div>
+        <% @genre = Genre.all %>
+         <%= f.label :genre, I18n.t("activerecord.attributes.restaurant.genre"), class: "block font-medium text-gray-700 text-lg" %>
+        <%= f.collection_select :genre, @genre, :id, :genre, { include_blank: "", selected: params[:genre] }, { id: "genreSelect", class: "mt-1 block w-full border-2 border-gray-90 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 px-2" } %>
+      </div>
+
+
+        
+         <%= f.submit "お店を選択", class: "text-xl w-full py-2 px-4 bg-sky-600 text-white my-4 font-medium rounded-md shadow hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" %>
       <% end %>
-    </div>  
+      </div>  
+    </div>
     
     <ol class="restaurants">
       <%= render @restaurants %>
     </ol>
     <%= will_paginate @restaurants %>
-  </div>
-</div>
+
+
 
 <script>
 

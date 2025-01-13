@@ -1,104 +1,116 @@
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <div class="form">
 
-    <div class="restaurant-img">
-      <% if @restaurant.image.attached? %>
-        <%= image_tag @restaurant.image.variant( resize: "50x50^", gravity: "center", crop: "100x100+0+0" )  %>
-      <% else %>
-        <%=  image_tag 'ディフォルト画像2.png' ,:size =>'50x50' %>
-      <% end %>
-    </div>
 
-    <div class="restaurant-upper-right">
-      <div class="restaurant-name">
-        <%= @restaurant.name %>
-      </div>  
+<div class="flex justify-center items-center min-h-screen">
+  <div class="w-full max-w-4xl bg-white shadow-md p-6 my-8 rounded-md rounded-xl">
+    <h1 class="text-3xl py-2 font-bold text-center"><%= @restaurant.name %></h1>
+
+    <div class="container">
+      <div class="swiper">
+        <div class="swiper-wrapper">
+  
+          <% if @restaurant.images.first.present? %> 
+            <div class="swiper-slide">
+              <%= image_tag @restaurant.images.first %>
+            </div>   
+          <% end %>
+       
+           <% if @restaurant.images.second.present? %> 
+             <div class="swiper-slide">
+               <%= image_tag @restaurant.images.second %>
+             </div>
+           <% end %>
+
+            <% if @restaurant.images.third.present? %> 
+              <div class="swiper-slide">
+                <%= image_tag @restaurant.images.third %>
+              </div>
+            <% end %>
+          </div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+       </div>
+ 
+
+       <div style="margin-left: 15%; margin-right: 15%;">
+
+       <div class="resturant-coment text-xl mb-4 mx-auto whitespace-normal break-words">
+       <%= @restaurant.coment %>
+     </div>
+    
+
+    <div class="flex flex-wrap gap-2 text-xl text-gray-500">
+    <% area1 = Area1.find_by(id: @restaurant.area1) %>
+    <% area2 = Area2.find_by(id: @restaurant.area2) %>
+    <% timing = Timing.find_by(id: @restaurant.timing) %>
+    <% genre = Genre.find_by(id: @restaurant.genre) %>
+    <% details = [] %>
+    <% details << "#" + area1.name if area1 %>
+    <% details << "#" + area2.city if area2 %>
+    <% details << "#" + timing.timing if timing %>
+    <% details << "#" + genre.genre if genre %>
+    
+    <% details.each do |detail| %>
+      <span class="px-2 py-1 bg-blue-100 rounded-lg text-blue-600">
+        <%= detail %>
+      </span>
+    <% end %>
+  </div>
+
+ 
+    <div class="text-xl">
       <div class="restaurant-user">
-        <% @user = User.find_by(id:@restaurant.user_id) %> 
-        <%= image_tag @user.image.variant( resize: "30x30^", gravity: "center", crop: "100x100+0+0" ) if @user.image.attached? %>
+        <% @user = User.find_by(id: @restaurant.user_id) %> 
+        <%= image_tag @user.image.variant(resize: "30x30^", gravity: "center", crop: "100x100+0+0") if @user.image.attached? %>
         <span class="user"><%= @user.name %></span>
       </div>  
-    </div> 
-
-    <div class="resturant-coment">  
-      <%= @restaurant.coment %>
     </div>
 
-  
- 
-      <div class = "restrant-info">
-        <% area1 = Area1.find_by(id:@restaurant.area1) %>
-          <%= "#" + "#{area1.name}" %>
-        <% area2 = Area2.find_by(id:@restaurant.area2) %>
-        <% if area2  %>
-        <%= "#" + "#{area2.city}" %>
-        <% else %>
-         <% " " %> 
-        <% end %> 
+    <% if @restaurant.lat and @restaurant.lng %>
+      <div id="map"></div>
+      <style>
+        #map { height: 600px; width: 100%; }
+      </style>
+    <% end %>
 
-        <% if @restaurant.genre  != ""  %>
-          <%= "#" + "#{@restaurant.genre}" %>
-        <% else %>
-          <% " " %> 
-        <% end %> 
-        <% if @restaurant.time != "" %>
-          <%= "#" + "#{@restaurant.time}" %>
-        <% else %>
-          <% " " %> 
-        <% end %> 
-      </div>
-      
-      <% if @restaurant.lat and @restaurant.lng %>
-        <div id='map'>
-        </div>
-        <style>
-        #map {
-        height: 600px;
-        width: 100%; 
-        }
-        </style>
-
+    <div class="text-xl py-3">
+      <% if current_user?(@restaurant.user) %>
+        <%= link_to "編集", edit_restaurant_path(@restaurant) %>
+        <%= link_to "削除", @restaurant, data: { "turbo-method": :delete, turbo_confirm: "本当に削除しますか？" } %>
       <% end %>
-      <div class="restaurant-menu">
-        <% if current_user?(@restaurant.user) %>
-          <%= link_to "編集" , edit_restaurant_path(@restaurant) %>
-          <%= link_to "削除", @restaurant, data: { "turbo-method": :delete,turbo_confirm: "本当に削除しますか？" } %>
-        <% end %>
-      </div>
-
-
-
     </div>
+       
+   </div> 
   </div>
-</div>    
-
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
+document.addEventListener('turbo:load', function() {
+const swiper = new Swiper('.swiper', {
+  // Optional parameters
+  loop: true,
 
-//初期マップの設定
+  // If we need pagination
+  pagination: {
+    el: '.swiper-pagination',
+  },
 
+  // Navigation arrows
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
 
-
-document.addEventListener('turbo:load', function() {  
-
-  let map
-  let marker
-
-  geocoder = new google.maps.Geocoder()
-
-  map = new google.maps.Map(document.getElementById('map'), {
-    center:  {lat: <%= @restaurant.lat %>, lng: <%= @restaurant.lng %>},
-    zoom: 15,
-  });
-
-   marker = new google.maps.Marker({
-    position:  {lat: <%= @restaurant.lat %>, lng: <%= @restaurant.lng %>},
-    map: map
-  });
-
-}) 
+  // And if we need scrollbar
+  scrollbar: {
+    el: '.swiper-scrollbar',
+  },
+});
+});
 
    
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.map_api_key %> &callback=initMap" async defer></script>
- 
+
+
+
+
