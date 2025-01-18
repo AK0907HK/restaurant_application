@@ -1,56 +1,64 @@
-<h1>選択結果</h1>
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <% if @restaurants.count > 0 %>
-      <ol class="restaurants">
-        <li id="@restaurant-<%= @restaurant.id %>">
-        <div class="restaurants-index-item">
-          <div class="restaurant-img">
-            <% if @restaurant.image.attached? %>
-              <%= image_tag @restaurant.image.variant( resize: "50x50^", gravity: "center", crop: "100x100+0+0" )  %>
-            <% else %>
-              <%=  image_tag 'ディフォルト画像2.png' ,:size =>'50x50' %>
-            <% end %>
-          </div>
-          <div class="restaurant-upper-right">
-          <%= link_to @restaurant.name,restaurant_path(@restaurant) , data: {turbo: false} ,class:"restaurant-name" %>
-       
-            <div class="restaurant-user">
-              <% @user = User.find_by(id:@restaurant.user_id) %>
-              <%= image_tag @user.image.variant( resize: "30x30^", gravity: "center", crop: "100x100+0+0" ) if @user.image.attached? %>
-              <span class="user"><%= @user.name %></span>
-            </div>  
-          </div> 
 
-          <div = "restaurant-bottom">
-          <div class = "restrant-info">
-            <% area1 = Area1.find_by(id:@restaurant.area1) %>
-              <%= "#" + "#{area1.name}" %>
-            <% area2 = Area2.find_by(id:@restaurant.area2) %>
-            <% if area2  %>
-              <%= "#" + "#{area2.city}" %>
-            <% else %>
-             <% " " %> 
-            <% end %> 
-            <% if @restaurant.genre  != ""  %>
-              <%= "#" + "#{@restaurant.genre}" %>
-            <% else %>
-              <% " " %> 
-            <% end %> 
-            <% if @restaurant.time != "" %>
-              <%= "#" + "#{@restaurant.time}" %>
-            <% else %>
-              <% " " %> 
-            <% end %> 
-          </div>
-        </div>
+
+<h1 class="text-3xl font-bold text-center my-8 pt-8">選択結果</h1>
+
+
+<div class="flex justify-center items-center">
+  <div class="w-full max-w-4xl bg-white shadow-md p-6 rounded-md rounded-xl my-8">
+    <% if @restaurants.count > 0 %>
+          <div class="restaurant-img flex-shrink-0">
+    <% if @restaurant.images.attached? %>
+  <%= image_tag @restaurant.images.first.variant(resize: "50x50^", gravity: "center", crop: "100x100+0+0"), class: "w-16 h-16 rounded-full object-cover" %>
+<% else %>
+  <%= image_tag 'ディフォルト画像2.png', size: '50x50', class: "w-16 h-16 rounded-full object-cover" %>
+<% end %>
+ 
+    </div>
+
+    <!-- 全体を垂直方向で揃える -->
+    <div class="flex-grow flex flex-col justify-between">
+      <!-- レストラン名 -->
+      <div>
+        <%= link_to @restaurant.name, restaurant_path(@restaurant), data: { turbo: false }, class: "text-lg font-bold text-blue-600 hover:underline" %>
       </div>
-    </li>
-    </ol>
+
+      <!-- ユーザー情報 -->
+      <div class="restaurant-user flex items-center space-x-2 mt-2">
+         <% @user = User.find_by(id:@restaurant.user_id) %>
+         <% if @user.image.attached? %>
+          <%= image_tag @user.image.variant(resize: "30x30^", gravity: "center", crop: "100x100+0+0"), class: "w-8 h-8 rounded-full object-cover" %>
+         <% end %>
+          <span class="text-sm text-gray-700"><%= @user.name %></span>
+
+       </div>  
+    </div>
+ 
+      <div class="flex flex-wrap gap-2 text-sm text-gray-500">
+      <% area1 = Area1.find_by(id: @restaurant.area1) %>
+      <% area2 = Area2.find_by(id: @restaurant.area2) %>
+      <% timing = Timing.find_by(id: @restaurant.timing) %>
+      <% genre = Genre.find_by(id: @restaurant.genre) %>
+      <% details = [] %>
+      <% details << "#" + area1.name if area1 %>
+      <% details << "#" + area2.city if area2 %>
+      <% details << "#" + timing.timing if timing %>
+      <% details << "#" + genre.genre if genre %>
+      
+      <% details.each do |detail| %>
+        <span class="px-2 py-1 bg-blue-100 rounded-lg text-blue-600">
+          <%= detail %>
+        </span>
+      <% end %>
+    </div>
+
+
+
     <% else %>
-      <div class="form"> 
         <p>検索結果がありませんでした。もう一度条件を絞りなおしてください。</p>
-      </div>
     <% end %>
+    <div class="text-right pt-5">
+      <%= link_to "戻る", restaurants_choose_form_path, class: "bg-sky-600 text-white font-bold py-2 px-4 rounded hover:bg-sky-700" %>
+    </div>
+
   </div>
  </div>
