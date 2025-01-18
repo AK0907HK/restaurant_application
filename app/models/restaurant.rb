@@ -20,12 +20,12 @@ class Restaurant < ApplicationRecord
   message:   "5MBより大きいファイルを投稿できません" }
   validate :image_length
 
-  def self.search_for(area1,area2,time,genre)
-    Restaurant.where(['area1 Like(?) AND area2 Like(?) AND time Like(?) AND genre Like(?)',"%#{area1}%","%#{area2}%","%#{time}%","%#{genre}%"])
+  def self.search_for(area1,area2,timing,genre)
+    Restaurant.where(['area1 Like(?) AND area2 Like(?) AND timing Like(?) AND genre Like(?)',"%#{area1}%","%#{area2}%","%#{timing}%","%#{genre}%"])
   end  
 
-  def self.choose_for(area1,area2,time,genre,user)
-    Restaurant.where(['area1 Like(?) AND area2 Like(?) AND time Like(?) AND genre Like(?) AND user_id =?',"%#{area1}%","%#{area2}%","%#{time}%","%#{genre}%",user])
+  def self.choose_for(area1,area2,timing,genre,user)
+    Restaurant.where(['area1 Like(?) AND area2 Like(?) AND timing Like(?) AND genre Like(?) AND user_id =?',"%#{area1}%","%#{area2}%","%#{timing}%","%#{genre}%",user])
   end 
 
   def image_length
@@ -34,4 +34,4 @@ class Restaurant < ApplicationRecord
       errors.add(:images, "は4枚以内にしてください")
     end
   end
-end
+end 

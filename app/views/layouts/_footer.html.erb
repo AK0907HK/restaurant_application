@@ -16,13 +16,13 @@
 
           <li class="flex items-center">
             <i class="fa fa-search mr-2" aria-hidden="true"></i>
-            <%= link_to "ポスト", posts_search_form_path, class: "hover:text-gray-200" %>
+            <%= link_to "お店", restaurants_search_form_path, class: "hover:text-gray-200" %>
           </li>
 
           <li class="flex items-center">
-            <i class="fa fa-search mr-2" aria-hidden="true"></i>
-            <%= link_to "お店", restaurants_search_form_path, class: "hover:text-gray-200" %>
-          </li>
+            <i class="fa far fa-user" aria-hidden="true"></i>
+          <%= link_to "プロフィール", current_user, class: "hover:text-gray-200" %>
+        </li>
         </ul>
       </nav>
     </div>
