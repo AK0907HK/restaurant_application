@@ -1,31 +1,27 @@
-<div class="row"> 
-<div class="col-md-6 col-md-offset-3">
+<div class="flex flex-col items-center mt-[30px]">
+  <% if @user.image.attached? %>
+    <%= image_tag @user.image.variant(resize: "80x80^", gravity: "center", crop: "100x100+0+0"), class: "rounded-full object-cover" %>
+  <% else %>
+    <%= image_tag 'ディフォルト画像2.png', size: '150x150', class: "rounded-full object-cover" %>
+  <% end %>
+  <p class="mt-2 text-center text-xl font-bold"><%= @user.name %></p>
+</div>
 
-    <section class="user_info">
-      
-      <p>
-     　
-      <% if @user.image.attached? %>
-      <%= image_tag @user.image.variant( resize: "80x80^", gravity: "center", crop: "100x100+0+0" )  %>
-      <% else %>
-        <%=  image_tag 'ディフォルト画像.png' ,class:"user-icon-image" %>
-      <% end %> 
- 
-        <%= @user.name %>
-      </p> 
-    </section>  
   
-    <ul class="user-tabs"> 
-      <li class="active"><%= link_to "ポスト" ,user_path(@user.id) %></li>  
-      <li><%= link_to "いいね",likes_path(@user.id)  %></li>
-      <li><%= link_to "お店",restaurants_path %></li> 
-    </ul>   
+    <div class="flex justify-center items-center">
+    <div class="w-full max-w-4xl bg-white shadow-md p-6 rounded-md rounded-xl my-8">     
 
-  <ol class="posts">
-    <%= render @posts %>
-  </ol>
-    <%= will_paginate @posts %>
+    <div class="flex justify-center border-b border-gray-200">
+    <%= link_to "全て", "#", class: "w-1/2 text-center text-teal-500 text-xl pb-1 border-b-2 border-teal-500 hover:text-teal-700" %>
+    <%= link_to "お気に入り", "#", class: "w-1/2 text-center text-gray-400 text-xl pb-1 hover:text-teal-500 hover:border-b-2 hover:border-teal-500" %>
+  </div>
+  
+
   
     </div>
 </div>
  
+<ol class="restaurants">
+<%= render @restaurants %>
+</ol>
+<%= will_paginate @restaurants %>
