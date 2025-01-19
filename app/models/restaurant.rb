@@ -2,6 +2,7 @@ class Restaurant < ApplicationRecord
   belongs_to :user 
   #has_one_attached :image
   has_many_attached :images 
+  has_many :likes, dependent: :destroy
   #has_many: posts
   default_scope -> { order(created_at: :desc) }
   validates :name, presence: true

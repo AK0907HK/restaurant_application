@@ -1,13 +1,14 @@
 
-
+ 
 <div class="flex justify-center items-center min-h-screen">
   <div class="w-full max-w-4xl bg-white shadow-md p-6 my-8 rounded-md rounded-xl">
     <h1 class="text-3xl py-2 font-bold text-center"><%= @restaurant.name %></h1>
-
+    
+    <% if @restaurant.images.attached? %>
     <div class="container">
       <div class="swiper">
         <div class="swiper-wrapper">
-  
+        
           <% if @restaurant.images.first.present? %> 
             <div class="swiper-slide">
               <%= image_tag @restaurant.images.first %>
@@ -30,35 +31,31 @@
           <div class="swiper-button-prev"></div>
           <div class="swiper-button-next"></div>
        </div>
- 
-
-       <div style="margin-left: 15%; margin-right: 15%;">
-
-       <div class="resturant-coment text-xl mb-4 mx-auto whitespace-normal break-words">
-       <%= @restaurant.coment %>
-     </div>
-    
-
-    <div class="flex flex-wrap gap-2 text-xl text-gray-500">
-    <% area1 = Area1.find_by(id: @restaurant.area1) %>
-    <% area2 = Area2.find_by(id: @restaurant.area2) %>
-    <% timing = Timing.find_by(id: @restaurant.timing) %>
-    <% genre = Genre.find_by(id: @restaurant.genre) %>
-    <% details = [] %>
-    <% details << "#" + area1.name if area1 %>
-    <% details << "#" + area2.city if area2 %>
-    <% details << "#" + timing.timing if timing %>
-    <% details << "#" + genre.genre if genre %>
-    
-    <% details.each do |detail| %>
-      <span class="px-2 py-1 bg-blue-100 rounded-lg text-blue-600">
-        <%= detail %>
-      </span>
+      </div>
     <% end %>
-  </div>
 
- 
-    <div class="text-xl flex items-center space-x-2 mt-2">
+   
+    <div style="margin-left: 15%; margin-right: 15%; class="flex flex-col">
+      <div class="resturant-coment text-xl mb-4 mx-auto whitespace-normal break-words">
+        <%= @restaurant.coment %>
+      </div>
+      <div class="flex flex-wrap gap-2 text-xl text-gray-500">
+        <% area1 = Area1.find_by(id: @restaurant.area1) %>
+        <% area2 = Area2.find_by(id: @restaurant.area2) %>
+        <% timing = Timing.find_by(id: @restaurant.timing) %>
+        <% genre = Genre.find_by(id: @restaurant.genre) %>
+        <% details = [] %>
+        <% details << "#" + area1.name if area1 %>
+        <% details << "#" + area2.city if area2 %>
+        <% details << "#" + timing.timing if timing %>
+        <% details << "#" + genre.genre if genre %>
+        <% details.each do |detail| %>
+        <span class="px-2 py-1 bg-blue-100 rounded-lg text-blue-600">
+        <%= detail %>
+        </span>
+        <% end %>
+      </div>
+      <div class="text-xl flex items-center justify-start space-x-2 mt-2">
         <% @user = User.find_by(id: @restaurant.user_id) %> 
         <% if @user.image.attached? %>
           <%= image_tag @user.image.variant(resize: "30x30^", gravity: "center", crop: "100x100+0+0")  %>
@@ -66,25 +63,31 @@
           <%= image_tag image_path("ディフォルト画像.png").variant(resize: "30x30^", gravity: "center", crop: "100x100+0+0") %>
         <% end %>
           <span class="user"><%= @user.name %></span>
-    </div>
-
-    <% if @restaurant.lat and @restaurant.lng %>
+       </div>
+      <% if @restaurant.lat and @restaurant.lng %>
       <div id="map"></div>
-      <style>
-        #map { height: 600px; width: 100%; }
-      </style>
-    <% end %>
-
-    <div class="text-xl py-3">
-      <% if current_user?(@restaurant.user) %>
-        <%= link_to "編集", edit_restaurant_path(@restaurant) %>
-        <%= link_to "削除", @restaurant, data: { "turbo-method": :delete, turbo_confirm: "本当に削除しますか？" } %>
+        <style>
+          #map { height: 600px; width: 100%; }
+        </style>
       <% end %>
+      <div class="text-xl py-3">
+        <% if current_user?(@restaurant.user) %>
+          <%= link_to "編集", edit_restaurant_path(@restaurant) %>
+          <%= link_to "削除", @restaurant, data: { "turbo-method": :delete, turbo_confirm: "本当に削除しますか？" } %>
+         <% end %>
+      </div>
+      <div class="restaurant-bottom flex flex-col items-end">
+        <% if Like.find_by(user_id: current_user.id, restaurant_id: @restaurant.id) %>
+          <%= button_to "♥", like_path(@restaurant.id), method: :delete, class: "text-3xl text-pink-500 font-bold", params: { user_id: current_user.id, restaurant_id: @restaurant.id } %>
+        <% else %>
+          <%= button_to "♥", likes_path(@restaurant.id), method: :post, class: "text-3xl font-bold", params: { user_id: current_user.id, restaurant_id: @restaurant.id } %>
+        <% end %>
+      </div>
     </div>
-       
-   </div> 
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  </div> 
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
 document.addEventListener('turbo:load', function() {
 const swiper = new Swiper('.swiper', {

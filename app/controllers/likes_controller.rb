@@ -1,5 +1,5 @@
 class LikesController < ApplicationController
-
+ 
   before_action :logged_in_user, only: [:index,:create,:destroy]
   before_action :correct_user ,only: [:index,:create,:destroy]
 
@@ -12,16 +12,17 @@ class LikesController < ApplicationController
   end
     
   def create
-    
-    @like = Like.new(user_id: current_user.id,post_id:params[:post_id])
+    #@like = Like.new(user_id: current_user.id,post_id:params[:post_id])
+    @like = Like.new(user_id: current_user.id,restaurant_id:params[:restaurant_id])
     @like.save
-    redirect_to user_path current_user
+    redirect_to restaurant_path(@like.restaurant_id)
   end
 
-  def destroy
-    @like = Like.find_by(user_id: current_user.id, post_id:params[:post_id])
+  def destroy 
+    #@like = Like.find_by(user_id: current_user.id, post_id:params[:post_id])
+    @like = Like.find_by(user_id: current_user.id, restaurant_id:params[:restaurant_id])
     @like.destroy
-    redirect_to likes_path current_user
+    redirect_to restaurant_path(@like.restaurant_id)
   end  
 
   private

@@ -13,7 +13,7 @@
 
     <div class="flex justify-center border-b border-gray-200">
     <%= link_to "全て", "#", class: "w-1/2 text-center text-teal-500 text-xl pb-1 border-b-2 border-teal-500 hover:text-teal-700" %>
-    <%= link_to "お気に入り", "#", class: "w-1/2 text-center text-gray-400 text-xl pb-1 hover:text-teal-500 hover:border-b-2 hover:border-teal-500" %>
+    <%= link_to "お気に入り", likes_path(current_user.id), class: "w-1/2 text-center text-gray-400 text-xl pb-1 hover:text-teal-500 hover:border-b-2 hover:border-teal-500" %>
   </div>
   
 
@@ -21,7 +21,7 @@
     </div>
 </div>
  
-<ol class="restaurants">
+<ol class="restaurants"> 
 <%= render @restaurants %>
 </ol>
 <%= will_paginate @restaurants %>
