@@ -7,6 +7,7 @@ ja:
         email: "メールアドレス"
         psssword: "パスワード"
         Confirmation: "パスワード(確認)"
+        image: "画像のアップロード"
       restaurant:
         restaurant_name: "店名(必須)"
         restaurant_name2: "店名"
