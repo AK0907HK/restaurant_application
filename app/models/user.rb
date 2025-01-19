@@ -6,6 +6,7 @@ class User < ApplicationRecord
   attr_accessor :remember_token,:activation_token, :reset_token
   before_save :downcase_email
   before_create :create_activation_digest
+  before_create :attach_default_image
   before_save { self.email = email.downcase }
   validates :name, presence: true, length: { maximum: 30 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -77,6 +78,16 @@ size:         { less_than: 5.megabytes,
 
   
   private
+     # デフォルト画像を添付
+    def attach_default_image
+      return if self.image.attached? # すでに画像が添付されている場合はスキップ
+
+      self.image.attach(
+        io: File.open(Rails.root.join('app/assets/images/default_image.png')),
+        filename: 'default_image.png',
+        content_type: 'image/png'
+      )
+    end
     #emailをすべて小文字化
     def downcase_email
       self.email = email.downcase

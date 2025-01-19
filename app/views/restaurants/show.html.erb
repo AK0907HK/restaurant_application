@@ -58,12 +58,14 @@
   </div>
 
  
-    <div class="text-xl">
-      <div class="restaurant-user">
+    <div class="text-xl flex items-center space-x-2 mt-2">
         <% @user = User.find_by(id: @restaurant.user_id) %> 
-        <%= image_tag @user.image.variant(resize: "30x30^", gravity: "center", crop: "100x100+0+0") if @user.image.attached? %>
-        <span class="user"><%= @user.name %></span>
-      </div>  
+        <% if @user.image.attached? %>
+          <%= image_tag @user.image.variant(resize: "30x30^", gravity: "center", crop: "100x100+0+0")  %>
+        <% else %>　
+          <%= image_tag image_path("ディフォルト画像.png").variant(resize: "30x30^", gravity: "center", crop: "100x100+0+0") %>
+        <% end %>
+          <span class="user"><%= @user.name %></span>
     </div>
 
     <% if @restaurant.lat and @restaurant.lng %>
