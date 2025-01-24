@@ -31,7 +31,7 @@ class RestaurantsController < ApplicationController
   end
 
 
-
+ 
   def edit
     @restaurant = Restaurant.find_by(id: params[:id])
   end  
