@@ -2,6 +2,9 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 import "custom/menu"
+import "./controllers/linked_select"; // 連動セレクトボックス
+import "./controllers/google_map";    // Google Maps
+
 //import "custom/image_upload"
 //import "custom/select_form"
 
