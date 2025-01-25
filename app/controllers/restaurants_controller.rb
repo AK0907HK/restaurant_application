@@ -38,9 +38,10 @@ class RestaurantsController < ApplicationController
 
   def update
     @restaurant = Restaurant.find_by(id: params[:id])
+    @restaurant.images.attach(params[:restaurant][:images])
     if @restaurant.update(restaurant_params)
       flash[:success] = "お店情報を更新しました!"
-      redirect_to restaurants_path
+      redirect_to restaurant_path(@restaurant.id)
     else
       render 'edit', status: :unprocessable_entity
     end         
@@ -89,7 +90,7 @@ class RestaurantsController < ApplicationController
       
   #strongparameter
   def restaurant_params
-    params.require(:restaurant).permit(:name,:area1,:area2,:timing,:genre,:coment,:lat,:lng)
+    params.require(:restaurant).permit(:name,:area1,:area2,:timing,:genre,:coment,:lat,:lng,:images)
 
   end
 
