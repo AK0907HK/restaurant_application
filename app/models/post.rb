@@ -1,7 +1,7 @@
 class Post < ApplicationRecord
   belongs_to :user
 
-  has_many :likes, dependent: :destroy
+  #has_many :likes, dependent: :destroy
   has_many_attached :images 
   #do |attachable|
     #attachable.variant :display, resize_to_limit: [500, 500]

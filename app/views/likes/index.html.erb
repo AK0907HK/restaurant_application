@@ -1,33 +1,72 @@
-<div class="row"> 
-<div class="col-md-6 col-md-offset-3">
-    <section class="user_info">
-      <p>
-     
-      <% if @user.image.attached? %>
-      <%= image_tag @user.image.variant( resize: "80x80^", gravity: "center", crop: "100x100+0+0" )  %>
-      <% else %>
-        <%=  image_tag 'ディフォルト画像.png' ,class:"user-icon-image" %>
-      <% end %> 
- 
-        <%= @user.name %>
-      </p> 
-    </section>  
-  
-    <ul class="user-tabs"> 
-      <li><%= link_to "ポスト" ,user_path(current_user.id) %></li>  
-      <li class="active"><%= link_to "いいね",likes_path(current_user.id)  %></li>
-      <li><%= link_to "お店",restaurants_path %></li> 
-    </ul>   
-
-    <ol class="posts"> 
-    <%= render @likes %>
-  </ol>
-    <%= will_paginate @likes %>
-  
-    </div> 
+<div class="flex flex-col items-center mt-[30px]">
+  <% if @user.image.attached? %>
+    <%= image_tag @user.image.variant(resize: "80x80^", gravity: "center", crop: "100x100+0+0"), class: "rounded-full object-cover" %>
+  <% else %>
+    <%= image_tag 'ディフォルト画像.png', size: '150x150', class: "rounded-full object-cover" %>
+  <% end %>
+  <p class="mt-2 text-center text-xl font-bold"><%= @user.name %></p>
 </div>
 
+  
+    <div class="flex justify-center items-center">
+    <div class="w-full max-w-4xl bg-white shadow-md p-6 rounded-md rounded-xl my-8">     
 
-
-
- 
+    <div class="flex justify-center border-b border-gray-200">
+    <%= link_to "全て", user_path(current_user.id) , class: "w-1/2 text-center text-gray-400 text-xl pb-1 hover:text-teal-500 hover:border-b-2 hover:border-teal-500" %>
+    <%= link_to "お気に入り", "#", class: "w-1/2 text-center text-teal-500 text-xl pb-1 border-b-2 border-teal-500 hover:text-teal-700" %>    
+      </div>  
+    </div>
+</div>
+<% @likes.each do |like|  %>
+  <% restaurant = Restaurant.find_by(id:like.restaurant_id) %>
+        <ol class="restaurants">
+      <li id="restaurant-<%= restaurant.id %>" class="mb-4">
+      <div class="bg-white shadow-md rounded-lg p-4 flex items-center space-x-4">
+        <div class="restaurant-img flex-shrink-0">
+        <% if restaurant.images.attached? %>
+      <%= image_tag restaurant.images.first.variant(resize: "50x50^", gravity: "center", crop: "100x100+0+0"), class: "w-16 h-16 rounded-full object-cover" %>
+    <% else %>
+      <%= image_tag 'ディフォルト画像2.png', size: '50x50', class: "w-16 h-16 rounded-full object-cover" %>
+    <% end %>
+      
+        </div>
+        <div class="flex-grow flex flex-col justify-between">
+        <!-- レストラン名 -->
+        <div>
+          <%= link_to restaurant.name, restaurant_path(restaurant), data: { turbo: false }, class: "text-lg font-bold text-blue-600 hover:underline" %>
+        </div>
+  
+        <!-- ユーザー情報 -->
+        <div class="restaurant-user flex items-center space-x-2 mt-2">
+         <% @user = User.find_by(id:restaurant.user_id) %>
+          <% if @user.image.attached? %>
+            <%= image_tag @user.image.variant(resize: "30x30^", gravity: "center", crop: "100x100+0+0"), class: "w-8 h-8 rounded-full object-cover" %>
+          <% end %>
+          <span class="text-sm text-gray-700"><%= @user.name %></span>
+        </div>
+      </div>
+  
+      <!-- 詳細情報 -->
+      <div class="flex flex-wrap gap-2 text-sm text-gray-500">
+        <% area1 = Area1.find_by(id: restaurant.area1) %>
+        <% area2 = Area2.find_by(id: restaurant.area2) %>
+        <% timing = Timing.find_by(id: restaurant.timing) %>
+        <% genre = Genre.find_by(id: restaurant.genre) %>
+        <% details = [] %>
+        <% details << "#" + area1.name if area1 %>
+        <% details << "#" + area2.city if area2 %>
+        <% details << "#" + timing.timing if timing %>
+        <% details << "#" + genre.genre if genre %>
+        
+        <% details.each do |detail| %>
+          <span class="px-2 py-1 bg-blue-100 rounded-lg text-blue-600">
+            <%= detail %>
+          </span>
+        <% end %>
+      </div>
+    </div>
+          
+    </li>
+      </ol>
+        <%= will_paginate @restaurants %>
+<% end %>
