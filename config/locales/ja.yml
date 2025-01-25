@@ -11,7 +11,8 @@ ja:
       restaurant:
         restaurant_name: "店名(必須)"
         restaurant_name2: "店名"
-        area1: "都道府県（必須）"  
+        area1: "都道府県（必須）" 
+        area1_2: "都道府県"  
         area2: "市町村"
         timing: "時間帯"
         genre: "ジャンル"
