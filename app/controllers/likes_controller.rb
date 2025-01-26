@@ -16,8 +16,8 @@ class LikesController < ApplicationController
     @like = Like.new(user_id: current_user.id,restaurant_id:params[:restaurant_id])
     @like.save
     redirect_to restaurant_path(@like.restaurant_id)
-  end
-
+  end 
+  
   def destroy 
     #@like = Like.find_by(user_id: current_user.id, post_id:params[:post_id])
     @like = Like.find_by(user_id: current_user.id, restaurant_id:params[:restaurant_id])

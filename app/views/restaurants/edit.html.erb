@@ -6,36 +6,41 @@
   <div class="w-full max-w-4xl bg-white shadow-md p-6 my-8 rounded-md rounded-xl">
     <%= form_with(model: @restaurant, class: "space-y-4") do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
+
+      
  
       <div>
         <%= f.label :restaurant_name, class: "block font-medium text-gray-700 text-lg" %>
         <%= f.text_field :name, id: 'restaurant-name', class: "mt-1 block w-full border-2 border-gray-90 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 px-2" %>
       </div>
 
-      <div>
+      <div> 
         <% @prefecture = Area1.all %>
         <%= f.label :area1, class: "block font-medium text-gray-700 text-lg" %>
-        <%= f.collection_select :area1, @prefecture, :id, :name, { include_blank: "", selected: params[:area1] }, { id: "prefectureSelect", class: "mt-1 block w-full border-2 border-gray-90 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 px-2" } %>
+        <%= f.collection_select :area1, @prefecture, :id, :name, { include_blank: "" }, { id: "prefectureSelect", class: "mt-1 block w-full border-2 border-gray-90 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 px-2" } %>
       </div>
+        
+
 
       <div>
         <% area2 = Area2.all %>
         <% @cities_json = area2.map { |o| o.attributes.symbolize_keys.select { |k, v| k.match(/(id|area1_id|city)\z/) } } %>
-        <% @cities = Area2.where(area1_id: params[:area1]) %>
+        <% @cities = Area2.where(area1_id: @restaurant.area1) %>
         <%= f.label :area2, class: "block font-medium text-gray-700 text-lg" %>
-        <%= f.collection_select :area2, @cities, :id, :city, { include_blank: "", selected: params[:area2] }, { id: "citySelect", class: "mt-1 block w-full border-2 border-gray-90 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 px-2", data: { json: @cities_json } } %>
+        <%= f.collection_select :area2, @cities, :id, :city, { include_blank: "" }, { id: "citySelect", class: "mt-1 block w-full border-2 border-gray-90 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 px-2", data: { json: @cities_json } } %>
       </div>
+        
 
       <div>
         <% @timing = Timing.all %>
         <%= f.label :timing, class: "block font-medium text-gray-700 text-lg" %>
-        <%= f.collection_select :timing, @timing, :id, :timing, { include_blank: "", selected: params[:timing] }, { id: "timigSelect", class: "mt-1 block w-full border-2 border-gray-90 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 px-2" } %>
+        <%= f.collection_select :timing, @timing, :id, :timing, { include_blank: ""}, { id: "timigSelect", class: "mt-1 block w-full border-2 border-gray-90 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 px-2" } %>
       </div>
  
       <div>
         <% @genre = Genre.all %>
         <%= f.label :genre, class: "block font-medium text-gray-700 text-lg" %>
-        <%= f.collection_select :genre, @genre, :id, :genre, { include_blank: "", selected: params[:genre] }, { id: "genreSelect", class: "mt-1 block w-full border-2 border-gray-90 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 px-2" } %>
+        <%= f.collection_select :genre, @genre, :id, :genre, { include_blank: ""}, { id: "genreSelect", class: "mt-1 block w-full border-2 border-gray-90 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-2 px-2" } %>
       </div>
 
       <div>
