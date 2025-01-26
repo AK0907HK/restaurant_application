@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Restaurant, type: :model do
+
+  before(:all) do
+    ActiveRecord::Base.connection
+  end
+  
   let(:user) { FactoryBot.create(:user) }
   #let(:restaurant) { Restaurant.new(name: 'xxxx', area1:1,user_id: user.id) }
   let(:restaurant) { user.restaurants.build(name: 'xxxx', area1:1) }
@@ -22,7 +27,7 @@ RSpec.describe Restaurant, type: :model do
     end
 
     it 'check coment word size' do
-      restaurant.coment = 'a' * 101
+      restaurant.coment = 'a' * 301
       expect(restaurant).to_not be_valid
     end  
 

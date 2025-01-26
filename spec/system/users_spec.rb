@@ -2,6 +2,11 @@ RSpec.describe "Users", type: :system do
     before do
       driven_by(:rack_test)
     end
+
+    it "is connected" do
+      expect(ActiveRecord::Base.connected?).to eq(true)
+    end
+    
     
     describe '#create' do
       context '無効な値の場合' do
