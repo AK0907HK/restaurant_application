@@ -45,18 +45,9 @@
 
       <div>
         <%= f.label :image, class: "block font-medium text-gray-700 text-lg" %>
- 
-
          <%= f.file_field :images, multiple: true, accept: "image/jpeg,image/gif,image/png", class:  %>
-        
-
-
-
       </div>
-      
-
-
-    <!-- 地図情報部分をフォームの中に配置 -->
+          <!-- 地図情報部分をフォームの中に配置 -->
     <h2 class="text-xl text-center font-light text-gray-600 my-4">地図情報を追加したい場合はこちら！</h2>
     <div class="space-y-4">
       <input id="address" type="textbox" value="東京駅 ランチ" class="block w-full border-2 border-gray-90 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 py-3 px-4" />
@@ -68,4 +59,53 @@
     <% end %>
   </div>
 </div>
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.map_api_key %> &callback=initMap" async defer></script>
+<script>
+document.addEventListener('turbo:load', () => {
+  if (document.getElementById('map')) {
+    initMap();
+  }
+});
+
+let map;
+let marker;
+let geocoder;
+
+// initMap をグローバルスコープに定義
+window.initMap = function () {
+  geocoder = new google.maps.Geocoder();
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: { lat: 35.6803997, lng: 139.7690174 },
+    zoom: 15,
+  });
+};
+
+// codeAddress をグローバルスコープに定義
+window.codeAddress = function () {
+  const inputAddress = document.getElementById('address').value;
+
+  geocoder.geocode({ address: inputAddress }, function (results, status) {
+    if (status === "OK") {
+      if (marker) marker.setMap(null);
+
+      map.setCenter(results[0].geometry.location);
+      marker = new google.maps.Marker({
+        map: map,
+        position: results[0].geometry.location,
+        draggable: true,
+      });
+
+      document.getElementById('lat').value = results[0].geometry.location.lat();
+      document.getElementById('lng').value = results[0].geometry.location.lng();
+
+      google.maps.event.addListener(marker, 'dragend', function (ev) {
+        document.getElementById('lat').value = ev.latLng.lat();
+        document.getElementById('lng').value = ev.latLng.lng();
+      });
+    } else {
+      alert("該当する住所が見つかりませんでした: " + status);
+    }
+  });
+};
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.google_maps[:api_key] %>&callback=initMap" async defer></script>
