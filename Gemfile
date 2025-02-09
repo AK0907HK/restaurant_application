@@ -31,15 +31,16 @@ gem "image_processing",           "1.12.2"
 gem 'rails-i18n'
 gem 'mini_magick', '~> 4.8'
 
+gem "mysql2", "~> 0.5"
 
 group :development, :test do
-  gem "sqlite3", "~> 1.4"
+  #gem "sqlite3", "~> 1.4"
   gem "debug",   "1.7.1", platforms: %i[ mri mingw x64_mingw ]
 end
 
 group :development do
   #gem "web-console", "4.2.0"
-  gem "mysql2", "~> 0.5"
+ 
   gem "solargraph",  "0.48.0"
 end
 
@@ -61,5 +62,5 @@ end
 #  gem "pg",         "1.3.5"
 #  gem "aws-sdk-s3", "1.114.0", require: false
 #end
-gem "tailwindcss-rails", "~> 3.1"
+#gem "tailwindcss-rails", "~> 3.1"
 gem 'cssbundling-rails'

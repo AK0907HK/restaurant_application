@@ -89,8 +89,11 @@
           
     </li>
       </ol>
-        <%= will_paginate @restaurants %>
+       
     <% end %>
+      <div class="flex justify-center mt-4">
+    <%= tailwind_pagination(@restaurants) %>
+  </div>
   
   
 

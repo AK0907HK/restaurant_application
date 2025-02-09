@@ -1,6 +1,6 @@
 <h1 class="text-3xl font-bold text-center my-8 pt-8">お店を選択する</h1>
 
-
+ 
 <div class="flex justify-center items-center">
   <div class="w-full max-w-4xl bg-white shadow-md p-6 rounded-md rounded-xl my-8">
     <%= form_with(url: "/restaurants/choose", method: :get) do |f| %>
@@ -41,7 +41,12 @@
     <ol class="restaurants">
       <%= render @restaurants %>
     </ol>
-    <%= will_paginate @restaurants %>
+  <div class="flex justify-center mt-4">
+    <%= tailwind_pagination(@restaurants) %>
+  </div>
+  
+  
+
 
 
 

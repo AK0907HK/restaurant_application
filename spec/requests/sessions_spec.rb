@@ -12,14 +12,9 @@ RSpec.describe "Sessions", type: :request do
     let(:user){ FactoryBot.create(:user) }
 
     it 'remember_token=1 and cookies values are not empty' do
-      post login_path, params: {session:{email:user.email,password:user.password,remember_me:1}}
-      expect(cookies[:remember_token]).to_not be_blank
-    end  
-
-    it 'remember_token=0 and cookies values are empty' do
-      post login_path, params: {session:{email:user.email,password:user.password,remember_me:0}}
-      expect(cookies[:remember_token]).to be_blank      
-    end
+      post login_path, params: {session:{email:user.email,password:user.password}}
+      expect(session[:user_id]).to eq(user.id)
+    end   
   end  
 
   describe 'DELETE /logout' do

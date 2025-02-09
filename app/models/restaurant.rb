@@ -6,7 +6,7 @@ class Restaurant < ApplicationRecord
   #has_many: posts
   default_scope -> { order(created_at: :desc) }
   validates :name, presence: true
-  #validates :user_r_id, presence: true
+  #validates :user_r_id, presence: true 
   validates :area1, presence: true
   validates :coment, length: { maximum: 300}
 

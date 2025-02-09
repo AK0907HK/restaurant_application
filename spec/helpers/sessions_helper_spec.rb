@@ -3,12 +3,13 @@ require 'rails_helper'
 RSpec.describe ApplicationHelper, type: :helper do
   describe "helper test" do    
     let(:user){ FactoryBot.create(:user)}
-    before do
-      remember(user)
-    end
-    
+    #before do
+    #  remember(user)
+    #end 
+
     context "session is blank" do
       it '2 users information are right' do
+        log_in(user)
         expect(user).to eq current_user
         expect(logged_in?).to be_truthy
       end

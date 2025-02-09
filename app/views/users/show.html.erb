@@ -24,4 +24,6 @@
 <ol class="restaurants"> 
 <%= render @restaurants %>
 </ol>
-<%= will_paginate @restaurants %>
+<div class="flex justify-center mt-4">
+<%= tailwind_pagination(@restaurants) %>
+</div>

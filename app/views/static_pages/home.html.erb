@@ -1,15 +1,14 @@
+<h1 class="text-3xl font-bold text-center my-8 pt-8">本サービスのご案内</h1>
 
-
-<div class="row"> 
-  <div class="col-md-6 col-md-offset-3">
-    <div class="form">
-       <div class="static_title"> 
+<div class="flex justify-center items-center">
+  <div class="w-full max-w-4xl bg-white text-xl shadow-md p-6 rounded-md rounded-xl my-8">
+  
          <h10>アカウント作成なしでも以下からログインできます！</h10>
-       </div>  
+
          
-        <h2>
-          <%= link_to "ゲストユーザーとしてログイン", guest_login_path, data: { turbo_method: :post } , class: "btn btn-lg btn-primary" %>
-        </h2>
+  
+          <%= link_to "ゲストユーザーとしてログイン", guest_login_path, data: { turbo_method: :post } , class: "text-lg font-bold text-blue-600 hover:underline" %>
+ 
         <div class="static_title"> 
           <h10>日々の飲食店選びをもっと便利に</h10>
         </div>   
@@ -58,4 +57,4 @@
       </div>  
     </div>
   </div>
-</div>    
+   

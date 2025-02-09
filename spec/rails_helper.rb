@@ -75,3 +75,22 @@ RSpec.configure do |config|
     config.include FactoryBot::Syntax::Methods
   end
 end
+
+RSpec.configure do |config|
+  # 全テスト実行前にデータベース接続を確立
+  config.before(:all) do
+    ActiveRecord::Base.connection
+  end
+
+  # 各テスト実行前にトランザクションを開始（データをロールバックするため）
+  config.before(:each) do
+    ActiveRecord::Base.connection.begin_transaction
+  end
+
+  # 各テスト実行後にトランザクションをロールバック（データを汚さないため）
+  config.after(:each) do
+    ActiveRecord::Base.connection.rollback_transaction
+  end
+end
+
+puts "Before tests, ActiveRecord.connected? => #{ActiveRecord::Base.connected?}"

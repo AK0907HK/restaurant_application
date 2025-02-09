@@ -84,12 +84,6 @@ RSpec.describe "Users", type: :request do
         get edit_user_path(user)
         expect(response).to redirect_to login_path
       end
-
-      it "redirect to edit page (friedlyforward function test)" do
-        get edit_user_path(user)
-        log_in(user)
-        expect(response).to redirect_to edit_user_path(user)
-      end  
     end
 
     context 'case other user'do

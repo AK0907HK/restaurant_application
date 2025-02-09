@@ -5,7 +5,19 @@ RSpec.describe "Restaurants", type: :system do
 
   before do
     driven_by(:rack_test)
+    data = {
+      '北海道' => ['札幌市', '札幌市中央区', '札幌市北区'],
+      '青森県' => ['青森市', '弘前市'],
+    }
+    create_area1_and_area2_from_seed(data)
   end
+
+
+
+
+
+
+
 
   describe 'index' do
     before do
@@ -76,6 +88,7 @@ RSpec.describe "Restaurants", type: :system do
         click_button "お店を追加"
         visit restaurants_path
         restaurant = Restaurant.first
+        visit restaurant_path(restaurant)
         expect {click_link '削除', href: restaurant_path(restaurant)}.to change(Restaurant, :count).by -1
       end
     end
@@ -97,7 +110,7 @@ RSpec.describe "Restaurants", type: :system do
         visit edit_restaurant_path(restaurant)
         fill_in 'restaurant-name',with:"yyyy"
         find("#prefectureSelect").find("option[value='1']").select_option
-        click_button "お店情報を更新"
+        click_button "お店情報を編集"
         redirect_to restaurants_path
       end  
     end  
@@ -112,7 +125,7 @@ RSpec.describe "Restaurants", type: :system do
         visit edit_restaurant_path(restaurant)
         fill_in 'restaurant-name',with:"  "
         find("#prefectureSelect").find("option[value='1']").select_option
-        click_button "お店情報を更新"
+        click_button "お店情報を編集"
         redirect_to edit_restaurant_path(restaurant)
       
       end  

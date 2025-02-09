@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Likes", type: :system do
   let(:user) { FactoryBot.create(:user) }
+  let!(:restaurant) { FactoryBot.create(:restaurant2) }
 
   before do
     driven_by(:rack_test)
