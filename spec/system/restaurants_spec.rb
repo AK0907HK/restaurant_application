@@ -11,7 +11,7 @@ RSpec.describe "Restaurants", type: :system do
     }
     create_area1_and_area2_from_seed(data)
   end
-
+ 
 
 
 

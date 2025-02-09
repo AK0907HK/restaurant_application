@@ -1,3 +1,92 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+ 
+
+
+ 
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+}
+/* app/assets/stylesheets/application.scss に追加 */
+.swiper {
+  width: 60%;  /* 最大幅を70%に設定 */
+  margin: 0 auto;  /* 中央寄せ */
+  height: 400px;  /* 必要に応じて調整 */
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;  /* 画像がはみ出さないように調整 */
+}
+
+.swiper-button-next, .swiper-button-prev {
+  color: #000;
+  z-index: 10;
+}
+
+.swiper-pagination-bullet {
+  background-color: #000;
+}
+
+
+.pagination {
+    display: flex;
+    justify-content: center; /* 横方向中央揃え */
+    align-items: center; /* 縦方向中央揃え */
+    gap: 0.5rem; /* 各ボタンの間隔 */
+    margin-bottom: 1rem; /* 下方向の余白 */
+  }
+  
+  .pagination a, .pagination span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid #1e3a8a;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #1e3a8a;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+    background-color: white; /* 背景色を白に設定 */
+  }
+  
+  .pagination a:hover {
+    background-color: #1e3a8a;
+    color: white;
+  }
+  
+  .pagination .current {
+    background-color: #1e3a8a;
+    color: white;
+    font-weight: bold;
+  }
+  
+  /* 「<」「>」のボタンデザイン */
+  .pagination .prev, .pagination .next {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+  }
+  
+  .pagination .prev:hover, .pagination .next:hover {
+    background-color: #1e3a8a;
+    color: white;
+  }
+  
