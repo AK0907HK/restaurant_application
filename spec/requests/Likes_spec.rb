@@ -9,7 +9,7 @@ RSpec.describe "Likes", type: :request do
         post likes_path, params: { like: { user_id: restaurant.user.id, restaurant_id: restaurant.id } }
       }.to_not change(Like, :count)
     end
-
+ 
     it "redirects to the login page" do
       post likes_path, params: { like: { user_id: restaurant.user.id, restaurant_id: restaurant.id } }
       expect(response).to redirect_to login_path
