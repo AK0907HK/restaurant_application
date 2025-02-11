@@ -9,6 +9,12 @@ FactoryBot.define do
     user { association :user, email: 'restaurant@example.com' }
     association :area1
   end
+
+  factory :restaurant3, class: Restaurant do
+    name { 'zzzz' }
+    user { association :user, email: 'restaurant2@example.com' }
+    association :area1
+  end
 end  
 
 def user_with_restaurants(restaurants_count: 5)
@@ -23,5 +29,10 @@ def user2_with_restaurants(restaurants_count: 5)
   end
 end
 
+def user2_with_restaurants(restaurants_count: 5)
+  FactoryBot.create(:user) do |user3|
+    FactoryBot.create_list(:restaurant3, restaurants_count, user: user3)
+  end
+end
 
   

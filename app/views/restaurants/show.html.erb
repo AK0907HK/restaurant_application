@@ -55,6 +55,18 @@
         </span>
         <% end %>
       </div>
+      <% if @restaurant.lat and @restaurant.lng %>
+      <div id="map" class="mt-[10px] mx-auto"
+           data-lat="<%= @restaurant.lat || 35.6803997 %>" 
+           data-lng="<%= @restaurant.lng || 139.7690174 %>" 
+           style="height: 400px; width: 85%;"></div>
+      
+      <script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.google_maps[:api_key] %>&callback=initMap" async defer></script>
+      
+              <style>
+                #map { height: 600px; width: 100%; }
+              </style>
+            <% end %>
       <div class="text-xl flex items-center justify-start space-x-2 mt-2">
         <% @user = User.find_by(id: @restaurant.user_id) %> 
         <% if @user.image.attached? %>
@@ -64,18 +76,7 @@
         <% end %>
           <span class="user"><%= @user.name %></span>
        </div>
-      <% if @restaurant.lat and @restaurant.lng %>
-<div id="map" 
-     data-lat="<%= @restaurant.lat || 35.6803997 %>" 
-     data-lng="<%= @restaurant.lng || 139.7690174 %>" 
-     style="height: 600px; width: 100%;"></div>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.google_maps[:api_key] %>&callback=initMap" async defer></script>
-
-        <style>
-          #map { height: 600px; width: 100%; }
-        </style>
-      <% end %>
       <div class="text-xl py-3">
         <% if current_user?(@restaurant.user) %>
           <%= link_to "編集", edit_restaurant_path(@restaurant) %>
@@ -94,11 +95,13 @@
     </div>
   </div> 
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
+console.log('aaa')
+console.log(document.querySelector('.swiper'))
 document.addEventListener('turbo:load', function() {
 const swiper = new Swiper('.swiper', {
+ 
   // Optional parameters
   loop: true,
 
@@ -119,10 +122,4 @@ const swiper = new Swiper('.swiper', {
   },
 });
 });
-
-
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.google_maps[:api_key] %>&callback=initMap" async defer></script>
-
-
-
- 
+</script>
