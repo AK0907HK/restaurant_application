@@ -80,10 +80,10 @@ class RestaurantsController < ApplicationController
   def destroy
     @restaurant.destroy
     flash[:success] = "お店を削除しました"
-    redirect_to restaurants_path
+    redirect_to user_path current_user
   end  
 
-
+ 
 
   
   private
