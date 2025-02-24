@@ -14,6 +14,7 @@ gem "jbuilder",        "2.11.5"
 gem "puma",            "5.6.5"
 gem "bootsnap",        "1.16.0", require: false
 gem "dotenv-rails"
+gem 'aws-sdk-s3'
 
 #ハッシュ化
 gem "bcrypt",          "3.1.18"
