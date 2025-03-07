@@ -1,26 +1,43 @@
-# Ruby 3.1.0をベースイメージとして使用
 FROM ruby:3.1.0
 
-# OSパッケージのアップデートと必要パッケージのインストール
-RUN apt-get update -qq && apt-get install -y \
-  nodejs \
-  yarn \
-  libmariadb-dev \
-  build-essential \
-  mariadb-client
+# Node.jsとYarnを導入
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
+    apt-get update -qq && \
+    apt-get install -y nodejs build-essential libmariadb-dev mariadb-client git python3 && \
+    npm install -g yarn@1
 
-# 作業ディレクトリを設定
 WORKDIR /app
 
-# GemfileとGemfile.lockを先にコピーしてbundle installを実施（キャッシュ利用のため）
 COPY Gemfile Gemfile.lock ./
-RUN bundle install
 
-# アプリケーションの全ファイルをコピー
+# 環境変数を設定（外部から渡される RAILS_ENV を反映）
+ENV RAILS_ENV=${RAILS_ENV}
+
+
+# 本番環境では development/test の gem を除外
+RUN if [ "$RAILS_ENV" = "production" ]; then \
+      bundle config set --local without "development test"; \
+    fi && \
+    bundle install
+
+COPY package.json yarn.lock ./
+
+# 環境に応じた Yarn パッケージのインストール
+RUN yarn install --frozen-lockfile
+
 COPY . .
 
-# ポート3001をExpose
-EXPOSE 3001
+# tailwindcss のビルドを事前に実行
+RUN yarn run build:css
 
-# Railsサーバーを起動（ホスト0.0.0.0で接続を受け付ける）
-CMD ["bin/rails", "server", "-b", "0.0.0.0"]
+# Rails のアセットプリコンパイル（本番環境のみ）
+RUN if [ "$RAILS_ENV" = "production" ]; then \
+      bundle exec rails assets:precompile; \
+    fi
+
+COPY entrypoint.sh /usr/bin/entrypoint.sh
+RUN chmod +x /usr/bin/entrypoint.sh
+
+EXPOSE 3001
+ENTRYPOINT ["/usr/bin/entrypoint.sh"]
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0", "-p", "3001"]

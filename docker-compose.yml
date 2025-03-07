@@ -2,7 +2,9 @@ version: '3'
 services:
   web:
     build: .
-    command: bash -c "rm -f /app/tmp/pids/server.pid && bundle exec rails server -b 0.0.0.0 -p 3001"
+ 
+    #command: sh -c "rm -f /app/tmp/pids/server.pid && bundle exec rails server -b 0.0.0.0 -p 3001"
+    command: bundle _2.4.22_ exec rails s -p 3001 -b 0.0.0.0
     volumes:
       - .:/app
     ports: 
@@ -10,6 +12,7 @@ services:
     depends_on:
       - db
     environment:
+      RAILS_ENV: development
       DATABASE_HOST: ${DATABASE_HOST}
       DATABASE_USERNAME: ${DATABASE_USERNAME}
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}

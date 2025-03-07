@@ -64,4 +64,4 @@ end
 #  gem "aws-sdk-s3", "1.114.0", require: false
 #end
 #gem "tailwindcss-rails", "~> 3.1"
-gem 'cssbundling-rails'
+#gem 'cssbundling-rails'
