@@ -10,6 +10,13 @@ module RestaurantApp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
+
+    # config/application.rb または環境別設定ファイルで
+
+    # config/application.rb の中または config/environments/production.rb / development.rb で
+    Rails.application.config.css_build_command = "yarn run css:install"
+
+
     
     config.active_storage.variant_processor = :mini_magick
     # Configuration for the application, engines, and railties goes here.
