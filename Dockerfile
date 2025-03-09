@@ -10,6 +10,7 @@ WORKDIR /app
 
 COPY Gemfile Gemfile.lock ./
 
+
 # 環境変数を設定（外部から渡される RAILS_ENV を反映）
 ENV RAILS_ENV=${RAILS_ENV}
 
@@ -21,9 +22,7 @@ RUN if [ "$RAILS_ENV" = "production" ]; then \
     bundle install
 
 COPY package.json yarn.lock ./
-
-# 環境に応じた Yarn パッケージのインストール
-RUN yarn install --frozen-lockfile
+RUN yarn cache clean && yarn install --frozen-lockfile
 
 COPY . .
 
