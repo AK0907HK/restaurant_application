@@ -6,7 +6,7 @@ services:
     #command: sh -c "rm -f /app/tmp/pids/server.pid && bundle exec rails server -b 0.0.0.0 -p 3001"
     command: bundle _2.4.22_ exec rails s -p 3001 -b 0.0.0.0
     volumes:
-      - .:/app
+      - .:/apps
     ports: 
       - "3001:3001"
     depends_on:
@@ -23,7 +23,7 @@ services:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
     ports:
-      - "3306:3306"
+      - "3306:3306" 
     volumes:
       - mysql-data:/var/lib/mysql
 
