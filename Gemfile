@@ -20,7 +20,8 @@ gem 'aws-sdk-s3'
 gem "bcrypt",          "3.1.18"
 
 #scss
-gem "bootstrap-sass",  "3.4.1"
+#gem "bootstrap-sass",  "3.4.1"
+gem "sass-rails", "~> 6.0"
 
 gem "faker",           "2.21.0"
 
