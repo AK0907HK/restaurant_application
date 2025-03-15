@@ -1,3 +1,6 @@
+version: '3.8'
+
+services:
   web:
     build: .
     command: bundle exec rails s -p 3001 -b 0.0.0.0
@@ -12,4 +15,3 @@
       DATABASE_USERNAME: ${PROD_DATABASE_USERNAME}
       DATABASE_PASSWORD: ${PROD_DATABASE_PASSWORD}
       DATABASE_NAME: ${PROD_DATABASE_NAME}
-
