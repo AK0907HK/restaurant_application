@@ -22,12 +22,12 @@ RUN if [ "$RAILS_ENV" = "production" ]; then \
     bundle install
 
 COPY package.json yarn.lock ./
-RUN yarn cache clean && yarn install --frozen-lockfile
-
+RUN yarn cache clean && yarn install --frozen-lockfile 
 COPY . .
 
-# tailwindcss のビルドを事前に実行
-RUN yarn run build:css
+# aseetsのビルドを事前に実行
+RUN yarn build && yarn run build:css
+
 
 # Rails のアセットプリコンパイル（本番環境のみ）
 RUN if [ "$RAILS_ENV" = "production" ]; then \
