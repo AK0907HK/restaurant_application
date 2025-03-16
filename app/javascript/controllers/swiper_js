@@ -1,4 +1,0 @@
- //import Swiper from "swiper";
-// 必要に応じて CSS もインポートする（Rails 7 で css bundling を使っている場合）
-// import "swiper/swiper-bundle.min.css";
-

@@ -89,37 +89,8 @@
         <% else %>
           <%= button_to "♥", likes_path(@restaurant.id), method: :post, class: "text-3xl font-bold", params: { user_id: current_user.id, restaurant_id: @restaurant.id } %>
         <% end %>
-        <%= @restaurant.lat %>
-        <%=  @restaurant.lng %>
       </div>
     </div>
   </div> 
 </div>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script>
-console.log('aaa')
-console.log(document.querySelector('.swiper'))
-document.addEventListener('turbo:load', function() {
-const swiper = new Swiper('.swiper', {
- 
-  // Optional parameters
-  loop: true,
-
-  // If we need pagination
-  pagination: {
-    el: '.swiper-pagination',
-  },
-
-  // Navigation arrows
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
-
-  // And if we need scrollbar
-  scrollbar: {
-    el: '.swiper-scrollbar',
-  },
-});
-});
-</script>
