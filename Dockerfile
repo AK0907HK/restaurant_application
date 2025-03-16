@@ -26,7 +26,7 @@ RUN yarn cache clean && yarn install --frozen-lockfile
 COPY . .
 
 # aseetsのビルドを事前に実行
-RUN yarn build && yarn run build:css
+RUN  yarn run build:css
 
 
 # Rails のアセットプリコンパイル（本番環境のみ）
