@@ -31,6 +31,7 @@ RUN  yarn run build:css
 
 # Rails のアセットプリコンパイル（本番環境のみ）
 RUN if [ "$RAILS_ENV" = "production" ]; then \
+      bundle exec rails assets:clobber && \
       bundle exec rails assets:precompile; \
     fi
 
