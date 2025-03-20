@@ -15,3 +15,13 @@ services:
       DATABASE_USERNAME: ${PROD_DATABASE_USERNAME}
       DATABASE_PASSWORD: ${PROD_DATABASE_PASSWORD}
       DATABASE_NAME: ${PROD_DATABASE_NAME}
+    expose:
+      - "3001"
+
+  nginx:
+    build:
+      context: ./nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - web

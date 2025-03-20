@@ -1,31 +1,39 @@
 version: '3'
+
 services:
   web:
     build: .
- 
-    #command: sh -c "rm -f /app/tmp/pids/server.pid && bundle exec rails server -b 0.0.0.0 -p 3001"
-    command: bundle _2.4.22_ exec rails s -p 3001 -b 0.0.0.0
+    command: bundle exec rails s -p 3001 -b 0.0.0.0
     volumes:
-      - .:/apps
-    ports: 
-      - "3001:3001"
-    depends_on:
-      - db
+      - .:/app
     environment:
       RAILS_ENV: development
       DATABASE_HOST: ${DATABASE_HOST}
       DATABASE_USERNAME: ${DATABASE_USERNAME}
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
       DATABASE_NAME: ${DATABASE_NAME}
+    expose:
+      - "3001"
+    depends_on:
+      - db
+
   db:
     image: mysql:8.0
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
     ports:
-      - "3306:3306" 
+      - "3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql
+
+  nginx:
+    build:
+      context: ./nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - web
 
 volumes:
   mysql-data:
