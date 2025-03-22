@@ -1,5 +1,5 @@
 import "@hotwired/turbo-rails";
 
 
-import "./custom/google_map";
-import "./custom/linked_select";
+import "./google_map";
+import "./linked_select";
