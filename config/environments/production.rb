@@ -95,14 +95,15 @@ Rails.application.configure do
   #config.action_mailer.default_url_options = { host: 'restaurantaplication.heroku.com'}
   #config.action_mailer.default_url_options = { host: 'restaurantaplication-85826252b2fb.herokuapp.com'}
   config.action_mailer.delivery_method = :smtp
-
+  config.action_mailer.default_url_options = { host: 'restaurant-chooser.com', protocol: 'https' }
   config.action_mailer.smtp_settings = {
-    address:              'email-smtp.ap-northeast-1.amazonaws.com', # 東京リージョン
+    address:              'email-smtp.ap-northeast-1.amazonaws.com',
     port:                 587,
     user_name:            ENV['SES_SMTP_USERNAME'],
     password:             ENV['SES_SMTP_PASSWORD'],
     authentication:       :login,
-    enable_starttls_auto: true
+    enable_starttls_auto: true,
+    domain: restaurant-chooser.com
   }
 
   # Use a different logger for distributed setups.
