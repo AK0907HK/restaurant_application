@@ -1,13 +1,23 @@
- // JavaScript for dropdown toggle
- document.querySelector("#account").addEventListener("click", function () {
-    const dropdown = document.querySelector("#dropdown-menu");
-    dropdown.classList.toggle("hidden");
-  });
+document.addEventListener("turbo:load", () => {
+  const account = document.querySelector("#account");
+  const dropdown = document.querySelector("#dropdown-menu");
 
-  // Close dropdown if clicked outside
-  document.addEventListener("click", function (e) {
-    if (!e.target.closest("#account") && !e.target.closest("#dropdown-menu")) {
-      const dropdown = document.querySelector("#dropdown-menu");
+  if (!account || !dropdown) return;
+
+  // 重複登録を防ぐ（必要に応じて）
+  if (!account.dataset.listenerAdded) {
+    account.addEventListener("click", () => {
+      dropdown.classList.toggle("hidden");
+    });
+    account.dataset.listenerAdded = "true";
+  }
+
+  document.addEventListener("click", (e) => {
+    if (
+      !e.target.closest("#account") &&
+      !e.target.closest("#dropdown-menu")
+    ) {
       dropdown.classList.add("hidden");
     }
   });
+});
