@@ -15,7 +15,7 @@ class Restaurant < ApplicationRecord
 #size:         { less_than: 5.megabytes,
 #  message:   "5MBより大きいファイルを投稿できません" }
 
-  validates :images,   content_type: { in: %w[image/jpeg image/gif image/png],
+  validates :images,   content_type: { in: %w[image/jpeg image/gif image/png image/heic image/heif],
   message: "対応している画像形式ではありません" },
   size:         { less_than: 5.megabytes,
   message:   "5MBより大きいファイルを投稿できません" }
@@ -31,7 +31,7 @@ class Restaurant < ApplicationRecord
 
   def image_length
     if images.length > 4
-      images.purge
+      #images.purge
       errors.add(:images, "は4枚以内にしてください")
     end
   end
