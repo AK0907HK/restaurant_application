@@ -53,42 +53,5 @@
         <div class="flex justify-center mt-4">
     <%= tailwind_pagination(@restaurants) %>
   </div>
+ 
   
-<script>
-
-var initSelect = ($target) => {
-  //セレクトボックスの中身を空にする
-  $target.empty()
-  //非選択時のオプションタグを追加する
-  $target.append(`<option></option>`)
-}
-//セレクトボックスの中身を第二引数 data の要素を持った選択肢にする
-var setSelect = ($target, data) => {
-  //引数 data の値をループで１件ずつ取得し、o として取り出す
-  $.each(data, (i, o) => {
-      //対象となるセレクトボックス($target)に対してオプションタグを追加
-      $target.append(`<option value="${o.id}">${o.city}</option>`)
-  })
-}
-
-//都道府県フォームからJSONデーターを取得
-
-var citiesData = $('#citySelect').data('json')
-
-
-var setCitiesOptions = (areaId) => {
-
-  console.log(areaId);
-  var result = citiesData.filter(o => o.area1_id == areaId)
-  initSelect($('#citySelect'))
-  setSelect($('#citySelect'), result)
-}
-
-
-document.getElementById('prefectureSelect').addEventListener('change', function(e){
-  var areaId = e.target.value
-  console.log(areaId);
-  setCitiesOptions(areaId)
-});
-
-</script>
