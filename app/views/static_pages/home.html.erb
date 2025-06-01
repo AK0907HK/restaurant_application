@@ -1,60 +1,52 @@
 <h1 class="text-3xl font-bold text-center my-8 pt-8">本サービスのご案内</h1>
 
 <div class="flex justify-center items-center">
-  <div class="w-full max-w-4xl bg-white text-xl shadow-md p-6 rounded-md rounded-xl my-8">
+  <div class="w-full max-w-4xl bg-white text-xl text-center shadow-md p-6 rounded-md rounded-xl my-8">
   
-         <h10>アカウント作成なしでも以下からログインできます！</h10>
+    <h2 class="text-2xl font-bold my-4">アカウント作成なしでも以下からログインできます！</h2>
 
-         
-  
-          <%= link_to "ゲストユーザーとしてログイン", guest_login_path, data: { turbo_method: :post } , class: "text-lg font-bold text-blue-600 hover:underline" %>
- 
-        <div class="static_title"> 
-          <h10>日々の飲食店選びをもっと便利に</h10>
-        </div>   
-          <br>
-          <p>RestaurantChooserは登録済のお店一覧から条件を絞り込んで、お店の選択を自動で行うサービスでです。</p>
-       
-
-          <div class="static_title"> 
-          <h10>お店の情報を登録しよう</h10>
-      </div>
-        <br>
-        <p>行きつけ・好きなお店の情報を登録します。店名や場所などの場所を入力します、googlemapからお店を探してもOK。</p>  
-        <%=  image_tag 'img1.png' ,class:"staticpage-image" %>
-        <%=  image_tag 'img5.png' ,class:"staticpage-image" %>
-      <div class="static_title"> 
-      <br>
-        <h10>お店を自動で選択しよう</h10>
-      </div>
-        <br>
-      <p>事前に登録したお店リストを元に絞り込みを行うと、お店を自動で選択してくれます。</p>    
-      <%=  image_tag 'img2.png',class:"staticpage-image" %>
-
-      <div class="static_title"> 
-      <br>
-        <h10>ポストやいいねといったSNS風の側面も</h10>
-      </div>
-        <br>
-      <p>いいなと思ったお店があればポストを書かいてもいいですし、他のユーザーのポストもいいねができるなど、SNS風の側面も持ち合わせてます。</p>  
-      <%=  image_tag 'img3.png',class:"staticpage-image" %>
-
-      <div class="static_title"> 
-      <br>
-        <h10>他のユーザーのポストやお店情報もどんどん検索しよう</h10>
-      </div>
-        <br>
-      <p>他のユーザーのポストや登録したお店は全て共有されます。リサーチをしてどんどん選択肢を広げましょう。</p>        
-      <%=  image_tag 'img4.png',class:"staticpage-image" %>
-      <br>
-        <div class="static_title"> 
-          <h10>お試しのログインはこちらから！</h10>
-        </div>  
-
-        <h2>
-          <%= link_to "ゲストユーザーとしてログイン", guest_login_path, data: { turbo_method: :post } , class: "btn btn-lg btn-primary" %>
-        </h2>
-      </div>  
+    <div class="my-4 flex justify-center">
+      <%= link_to "ゲストユーザーとしてログイン", guest_login_path, data: { turbo_method: :post },
+        class: "text-xl w-1/2 text-center py-3 px-4 bg-sky-600 text-white font-medium rounded-md shadow hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" %>
     </div>
+
+    <h2 class="text-2xl font-bold my-4">日々の飲食店選びをもっと便利に</h2>
+
+    <p class="text-base text-left max-w-3xl mx-auto my-4">
+      RestaurantChooserは登録済のお店一覧から条件を絞り込んで、お店の選択を自動で行うサービスです。
+    </p>
+
+    <h2 class="text-2xl font-bold my-4">お店の情報を登録しよう</h2>
+
+    <p class="text-base text-left max-w-3xl mx-auto my-4">
+      行きつけ・好きなお店の情報を登録します。店名や場所などの場所を入力します、Google Mapからお店を探してもOKです。
+    </p>
+
+    <%= image_tag 'img1.jpeg', class: "staticpage-image my-4 mx-auto" %>
+
+    <h2 class="text-2xl font-bold my-4">お店を自動で選択しよう</h2>
+
+    <p class="text-base text-left max-w-3xl mx-auto my-4">
+      事前に登録したお店リストを元に絞り込みを行うと、お店を自動で選択してくれます。
+    </p>
+
+    <%= image_tag 'img2.jpeg', class: "staticpage-image my-4 mx-auto" %>
+
+    <h2 class="text-2xl font-bold my-4">他のユーザーのポストやお店情報もどんどん検索しよう</h2>
+
+    <p class="text-base text-left max-w-3xl mx-auto my-4">
+      他のユーザーのポストや登録したお店は全て共有されます。リサーチをしてどんどん選択肢を広げましょう。
+    </p>
+
+    <%= image_tag 'img4.jpeg', class: "staticpage-image my-4 mx-auto" %>
+    <%= image_tag 'img1.jpeg', class: "staticpage-image my-4 mx-auto" %>
+
+    <h2 class="text-2xl font-bold my-4">お試しのログインはこちらから！</h2>
+
+    <div class="my-4 flex justify-center">
+      <%= link_to "ゲストユーザーとしてログイン", guest_login_path, data: { turbo_method: :post },
+        class: "text-xl w-1/2 text-center py-3 px-4 bg-sky-600 text-white font-medium rounded-md shadow hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" %>
+    </div>
+
   </div>
-   
+</div>
