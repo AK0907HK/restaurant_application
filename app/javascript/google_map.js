@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (mapElement) {
     const lat = parseFloat(mapElement.dataset.lat) || 35.6803997; // 緯度 (デフォルト: 東京駅)
     const lng = parseFloat(mapElement.dataset.lng) || 139.7690174; // 経度 (デフォルト: 東京駅)
-    console.log(lat);
-    console.log(lag);
+    //console.log(lat);
+    //console.log(lag);
     // Google Maps API がロードされている場合のみ初期化
     if (typeof google !== 'undefined' && typeof google.maps !== 'undefined') {
       initMap(lat, lng);
