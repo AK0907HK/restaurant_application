@@ -71,13 +71,15 @@
     </div>
 
 
-    <% lat = @restaurant.lat || 35.6803997 %>
-<% lng = @restaurant.lng || 139.7690174 %>
-<div id="map" class="w-full h-96 mt-4 border rounded-md
+
+
+   <% lat = @restaurant.lat || 35.6803997 %>
+   <% lng = @restaurant.lng || 139.7690174 %>
+    <div id="map"
+     class="w-full h-96 mt-4 border rounded-md"
      data-lat="<%= lat %>"
      data-lng="<%= lng %>">
-</div>
-
+    </div>
     <%= @restaurant.lat %>
     <%= @restaurant.lng %>
 
