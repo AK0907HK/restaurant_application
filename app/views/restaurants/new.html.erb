@@ -2,7 +2,8 @@
 
 <div class="flex justify-center min-h-screen">
   <div class="w-full max-w-4xl bg-white shadow-md p-6 my-8 rounded-md rounded-xl">
-    <%= form_with(model: @restaurant, class: "space-y-4") do |f| %>
+    
+    <%= form_with(model: @restaurant, class: "space-y-4", data: { turbo: false }) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
       <div>

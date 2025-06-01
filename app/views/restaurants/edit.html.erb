@@ -4,7 +4,7 @@
 
 <div class="flex justify-center min-h-screen">
   <div class="w-full max-w-4xl bg-white shadow-md p-6 my-8 rounded-md rounded-xl">
-    <%= form_with(model: @restaurant, class: "space-y-4") do |f| %>
+    <%= form_with(model: @restaurant, class: "space-y-4", data: { turbo: false }) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
       
@@ -70,11 +70,23 @@
       <input type="button" value="検索" onclick="codeAddress()" class="text-xl block w-full py-2 px-4 bg-sky-600 text-white font-medium rounded-md shadow hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" />
     </div>
 
-    <div id="map" class="w-full h-96 mt-4 border rounded-md"></div>
+
+    <% lat = @restaurant.lat || 35.6803997 %>
+<% lng = @restaurant.lng || 139.7690174 %>
+<div id="map" class="w-full h-96 mt-4 border rounded-md
+     data-lat="<%= lat %>"
+     data-lng="<%= lng %>">
+</div>
+
+    <%= @restaurant.lat %>
+    <%= @restaurant.lng %>
+
           <%= f.submit "お店情報を編集", class: "text-xl w-full py-2 px-4 bg-sky-600 text-white font-medium rounded-md shadow hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" %>
     <% end %>
   </div>
 </div>
-<script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.map_api_key %> &callback=initMap" async defer></script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.google_maps[:api_key] %>&callback=initMap" async defer></script>
+
 
 
