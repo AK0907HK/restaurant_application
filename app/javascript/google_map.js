@@ -1,24 +1,17 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const mapElement = document.getElementById('map');
-  if (mapElement) {
-    const lat = parseFloat(mapElement.dataset.lat) || 35.6803997;
-    const lng = parseFloat(mapElement.dataset.lng) || 139.7690174;
-
-    if (typeof google !== 'undefined' && typeof google.maps !== 'undefined') {
-      window.initMap(lat, lng); // ← グローバル関数として実行
-    }
-  }
-});
-
 let map;
 let marker;
 let geocoder;
 
+window.initMap = function () {
+  const mapElement = document.getElementById('map');
+  if (!mapElement) return;
 
-window.initMap = function(lat, lng) {
+  const lat = parseFloat(mapElement.dataset.lat) || 35.6803997;
+  const lng = parseFloat(mapElement.dataset.lng) || 139.7690174;
+
   geocoder = new google.maps.Geocoder();
 
-  map = new google.maps.Map(document.getElementById('map'), {
+  map = new google.maps.Map(mapElement, {
     center: { lat: lat, lng: lng },
     zoom: 15,
   });
@@ -37,6 +30,8 @@ window.initMap = function(lat, lng) {
 
 window.codeAddress = function () {
   const inputAddress = document.getElementById('address').value;
+
+  if (!geocoder || !map) return;
 
   geocoder.geocode({ address: inputAddress }, function (results, status) {
     if (status === 'OK') {
